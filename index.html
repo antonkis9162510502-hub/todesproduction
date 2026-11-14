@@ -72,31 +72,28 @@
     /* Dedicated metallic wordmark; no photographic background */
     @media (max-width:760px) { .hero-photo-wrap { width:min(100%,620px); margin:33px auto 13px; } .hero-photo { filter:drop-shadow(0 12px 12px rgba(0,0,0,.34)); } .eyebrow { letter-spacing:.13em; max-width:100%; } }
     body { overflow-x:hidden; }
-    /* Metallic glints: a second translucent image is clipped by its own alpha,
-       while a moving Safari-compatible gradient mask reveals only the highlight. */
+    /* iOS-friendly metallic reflection: reveal a brighter duplicate of the
+       transparent logo with a moving polygon, no animated CSS masks required. */
     .hero-photo-shine {
       position:absolute;
       inset:0;
       z-index:1;
+      display:block;
       width:100%;
       height:auto;
       pointer-events:none;
-      filter:brightness(2.55) contrast(1.12);
       opacity:0;
-      -webkit-mask-image:linear-gradient(105deg, transparent 36%,rgba(0,0,0,.25) 43%,#000 49%,rgba(0,0,0,.28) 54%,transparent 62%);
-      mask-image:linear-gradient(105deg, transparent 36%,rgba(0,0,0,.25) 43%,#000 49%,rgba(0,0,0,.28) 54%,transparent 62%);
-      -webkit-mask-size:300% 100%;
-      mask-size:300% 100%;
-      -webkit-mask-repeat:no-repeat;
-      mask-repeat:no-repeat;
-      animation:metal-shine-sweep 6.3s ease-in-out infinite;
-      will-change:opacity,-webkit-mask-position;
+      filter:brightness(3) contrast(1.15) drop-shadow(0 0 9px rgba(216,236,255,.5));
+      -webkit-clip-path:polygon(-25% 0,-12% 0,8% 100%,-5% 100%);
+      clip-path:polygon(-25% 0,-12% 0,8% 100%,-5% 100%);
+      animation:metal-shine-sweep 5s linear infinite;
+      will-change:clip-path,opacity;
     }
     @keyframes metal-shine-sweep {
-      0%,8% { opacity:0; -webkit-mask-position:100% 0; mask-position:100% 0; }
-      17% { opacity:1; }
-      49% { opacity:1; -webkit-mask-position:0% 0; mask-position:0% 0; }
-      57%,100% { opacity:0; -webkit-mask-position:0% 0; mask-position:0% 0; }
+      0%,6% { opacity:0; -webkit-clip-path:polygon(-25% 0,-12% 0,8% 100%,-5% 100%); clip-path:polygon(-25% 0,-12% 0,8% 100%,-5% 100%); }
+      12% { opacity:1; }
+      46% { opacity:1; -webkit-clip-path:polygon(100% 0,113% 0,133% 100%,120% 100%); clip-path:polygon(100% 0,113% 0,133% 100%,120% 100%); }
+      52%,100% { opacity:0; -webkit-clip-path:polygon(100% 0,113% 0,133% 100%,120% 100%); clip-path:polygon(100% 0,113% 0,133% 100%,120% 100%); }
     }
     /* The small TODESPRODUCTION wordmark also receives a fine silver highlight. */
     .brand > span:last-child {
@@ -114,7 +111,7 @@
       49%,100% { background-position:0% 50%; }
     }
     @media (max-width:760px) {
-      .hero-photo-shine { filter:brightness(2.85) contrast(1.16); }
+      .hero-photo-shine { filter:brightness(3.3) contrast(1.14) drop-shadow(0 0 12px rgba(232,242,255,.65)); }
     }
     @media (prefers-reduced-motion:reduce) {
       .hero-photo-shine,.brand > span:last-child { animation:none; }
