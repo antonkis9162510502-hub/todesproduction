@@ -72,39 +72,54 @@
     /* Dedicated metallic wordmark; no photographic background */
     @media (max-width:760px) { .hero-photo-wrap { width:min(100%,620px); margin:33px auto 13px; } .hero-photo { filter:drop-shadow(0 12px 12px rgba(0,0,0,.34)); } .eyebrow { letter-spacing:.13em; max-width:100%; } }
     body { overflow-x:hidden; }
-    /* Sweeping metal reflection, clipped precisely to the logo's transparent pixels. */
-    .hero-photo-wrap[data-metal-shine="on"]::after {
-      content:"";
+    /* Metallic glints: a second translucent image is clipped by its own alpha,
+       while a moving Safari-compatible gradient mask reveals only the highlight. */
+    .hero-photo-shine {
       position:absolute;
       inset:0;
       z-index:1;
+      width:100%;
+      height:auto;
       pointer-events:none;
-      background:linear-gradient(107deg,
-        transparent 27%,
-        rgba(217,232,247,.03) 36%,
-        rgba(243,249,255,.2) 42%,
-        rgba(255,255,255,.68) 46%,
-        rgba(227,238,251,.22) 49%,
-        transparent 58%);
-      background-size:240% 100%;
-      background-repeat:no-repeat;
-      -webkit-mask-image:var(--metal-logo-mask);
-      mask-image:var(--metal-logo-mask);
-      -webkit-mask-size:100% 100%;
-      mask-size:100% 100%;
+      filter:brightness(2.55) contrast(1.12);
+      opacity:0;
+      -webkit-mask-image:linear-gradient(105deg, transparent 36%,rgba(0,0,0,.25) 43%,#000 49%,rgba(0,0,0,.28) 54%,transparent 62%);
+      mask-image:linear-gradient(105deg, transparent 36%,rgba(0,0,0,.25) 43%,#000 49%,rgba(0,0,0,.28) 54%,transparent 62%);
+      -webkit-mask-size:300% 100%;
+      mask-size:300% 100%;
       -webkit-mask-repeat:no-repeat;
       mask-repeat:no-repeat;
-      opacity:0;
-      animation:metal-glint 7.5s linear infinite;
+      animation:metal-shine-sweep 6.3s ease-in-out infinite;
+      will-change:opacity,-webkit-mask-position;
     }
-    @keyframes metal-glint {
-      0%,10% { background-position:100% 50%; opacity:0; }
-      15% { opacity:.9; }
-      47% { background-position:0% 50%; opacity:.9; }
-      53%,100% { background-position:0% 50%; opacity:0; }
+    @keyframes metal-shine-sweep {
+      0%,8% { opacity:0; -webkit-mask-position:100% 0; mask-position:100% 0; }
+      17% { opacity:1; }
+      49% { opacity:1; -webkit-mask-position:0% 0; mask-position:0% 0; }
+      57%,100% { opacity:0; -webkit-mask-position:0% 0; mask-position:0% 0; }
+    }
+    /* The small TODESPRODUCTION wordmark also receives a fine silver highlight. */
+    .brand > span:last-child {
+      color:#eee;
+      background:linear-gradient(100deg,#e3e3e0 34%,#fff 45%,#94a0a8 51%,#fff 55%,#d6d8d9 65%);
+      background-size:260% 100%;
+      background-position:100% 50%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+      animation:brand-metal-shine 6.3s ease-in-out infinite;
+    }
+    @keyframes brand-metal-shine {
+      0%,8% { background-position:100% 50%; }
+      49%,100% { background-position:0% 50%; }
+    }
+    @media (max-width:760px) {
+      .hero-photo-shine { filter:brightness(2.85) contrast(1.16); }
     }
     @media (prefers-reduced-motion:reduce) {
-      .hero-photo-wrap[data-metal-shine="on"]::after { animation:none; opacity:0; }
+      .hero-photo-shine,.brand > span:last-child { animation:none; }
+      .hero-photo-shine { display:none; }
+      .brand > span:last-child { background:none; -webkit-text-fill-color:currentColor; }
     }
 </style>
 </head>
@@ -168,13 +183,16 @@
     })();
   </script>
 <script>
-    // Reuse the image's alpha channel so the highlight never crosses the dark background.
+    // Duplicate the original transparent logo without downloading a second asset.
+    // The highlight stays limited to the letters, even in iOS Safari.
     (() => {
       const logo = document.querySelector('.hero-photo-wrap .hero-photo');
-      const frame = logo && logo.closest('.hero-photo-wrap');
-      if (!frame) return;
-      frame.style.setProperty('--metal-logo-mask', 'url("' + logo.src + '")');
-      frame.dataset.metalShine = 'on';
+      if (!logo || document.querySelector('.hero-photo-shine')) return;
+      const shine = logo.cloneNode(false);
+      shine.classList.add('hero-photo-shine');
+      shine.setAttribute('aria-hidden','true');
+      shine.alt = '';
+      logo.insertAdjacentElement('afterend', shine);
     })();
   </script>
 </body>
