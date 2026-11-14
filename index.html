@@ -72,6 +72,40 @@
     /* Dedicated metallic wordmark; no photographic background */
     @media (max-width:760px) { .hero-photo-wrap { width:min(100%,620px); margin:33px auto 13px; } .hero-photo { filter:drop-shadow(0 12px 12px rgba(0,0,0,.34)); } .eyebrow { letter-spacing:.13em; max-width:100%; } }
     body { overflow-x:hidden; }
+    /* Sweeping metal reflection, clipped precisely to the logo's transparent pixels. */
+    .hero-photo-wrap[data-metal-shine="on"]::after {
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:linear-gradient(107deg,
+        transparent 27%,
+        rgba(217,232,247,.03) 36%,
+        rgba(243,249,255,.2) 42%,
+        rgba(255,255,255,.68) 46%,
+        rgba(227,238,251,.22) 49%,
+        transparent 58%);
+      background-size:240% 100%;
+      background-repeat:no-repeat;
+      -webkit-mask-image:var(--metal-logo-mask);
+      mask-image:var(--metal-logo-mask);
+      -webkit-mask-size:100% 100%;
+      mask-size:100% 100%;
+      -webkit-mask-repeat:no-repeat;
+      mask-repeat:no-repeat;
+      opacity:0;
+      animation:metal-glint 7.5s linear infinite;
+    }
+    @keyframes metal-glint {
+      0%,10% { background-position:100% 50%; opacity:0; }
+      15% { opacity:.9; }
+      47% { background-position:0% 50%; opacity:.9; }
+      53%,100% { background-position:0% 50%; opacity:0; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      .hero-photo-wrap[data-metal-shine="on"]::after { animation:none; opacity:0; }
+    }
 </style>
 </head>
 <body>
@@ -131,6 +165,16 @@
           status.textContent = 'Заявка подготовлена ниже. Скопируйте текст вручную — демонстрационная форма пока не отправляет сообщения.';
         }
       });
+    })();
+  </script>
+<script>
+    // Reuse the image's alpha channel so the highlight never crosses the dark background.
+    (() => {
+      const logo = document.querySelector('.hero-photo-wrap .hero-photo');
+      const frame = logo && logo.closest('.hero-photo-wrap');
+      if (!frame) return;
+      frame.style.setProperty('--metal-logo-mask', 'url("' + logo.src + '")');
+      frame.dataset.metalShine = 'on';
     })();
   </script>
 </body>
