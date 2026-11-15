@@ -146,6 +146,32 @@
 
     /* Contact form modal: responsive and accessible */
     .header-link { background:transparent; cursor:pointer; }
+    /* Match the oval category pills while retaining the contact dialog behavior. */
+    .header-link.contact-open {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:9px 14px;
+      border:1px solid #34383c;
+      border-radius:100px;
+      background:transparent;
+      color:#aeb0b1;
+      font-size:11px;
+      line-height:1.2;
+      font-weight:400;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      transition:border-color .2s ease,color .2s ease,background .2s ease;
+    }
+    .header-link.contact-open:hover {
+      border-color:#626c75;
+      color:#f1f3f4;
+      background:rgba(255,255,255,.045);
+    }
+    @media (max-width:440px) {
+      .header-link.contact-open { padding:8px 10px; font-size:10px; }
+    }
     .footer-contact { background:none; border:0; border-bottom:1px solid #454b52; padding:0 0 3px; color:#bec2c6; font-size:inherit; letter-spacing:inherit; cursor:pointer; }
     .footer-contact:hover { color:#fff; }
     .contact-dialog { position:fixed; width:min(510px,calc(100% - 28px)); max-height:calc(100dvh - 28px); overflow-y:auto; margin:auto; padding:0; border:1px solid #444b54; border-radius:9px; background:#14181d; color:#f1f1ee; box-shadow:0 30px 100px rgba(0,0,0,.6); }
