@@ -54,11 +54,12 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 }
 
 /* Волшебная планета — утверждённый баннер TODES, без дополнительных надписей. */
-.magic-planet-banner{display:block;position:relative;overflow:hidden;margin:22px 0 26px;border:1px solid rgba(168,184,215,.21);border-radius:18px;background:#090b0e;box-shadow:0 12px 34px rgba(0,0,0,.26);transition:border-color .25s ease,box-shadow .25s ease}
-.magic-planet-banner:hover{border-color:rgba(192,208,241,.52);box-shadow:0 14px 40px rgba(0,0,0,.36)}
+.magic-planet-banner{display:block;position:relative;overflow:hidden;margin:22px 0 26px;border:0;border-radius:17px;background:#090b0e;text-decoration:none;transition:filter .25s ease}
+.magic-planet-banner:hover{filter:brightness(1.06)}
 .magic-planet-banner:focus-visible{outline:2px solid #a8bedb;outline-offset:4px}
 .magic-planet-banner img{display:block;width:100%;height:auto;aspect-ratio:1600 / 533;object-fit:contain}
-@media(max-width:650px){.magic-planet-banner{margin:16px 0 20px;border-radius:10px}}
+.magic-planet-banner::after{content:"";position:absolute;inset:-2px;pointer-events:none;background:linear-gradient(90deg,#090b0e 0%,rgba(9,11,14,.6) 2%,transparent 8%,transparent 92%,rgba(9,11,14,.6) 98%,#090b0e 100%),linear-gradient(180deg,#090b0e 0%,rgba(9,11,14,.55) 4%,transparent 14%,transparent 83%,rgba(9,11,14,.65) 96%,#090b0e 100%);filter:blur(3px)}
+@media(max-width:650px){.magic-planet-banner{margin:16px 0 20px;border-radius:12px}.magic-planet-banner::after{background:linear-gradient(90deg,#090b0e 0%,rgba(9,11,14,.46) 3%,transparent 9%,transparent 91%,rgba(9,11,14,.46) 97%,#090b0e 100%),linear-gradient(180deg,#090b0e 0%,rgba(9,11,14,.48) 5%,transparent 17%,transparent 80%,rgba(9,11,14,.63) 95%,#090b0e 100%)}}
 @media(prefers-reduced-motion:reduce){.magic-planet-banner{transition:none}}
 
 </style>
