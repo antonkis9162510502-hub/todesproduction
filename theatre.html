@@ -446,7 +446,7 @@ function render(lang) {
   const nextMidnight = Date.parse(today + 'T00:00:00+03:00') + 86400000;
   clearTimeout(midnightTimer);
   midnightTimer = setTimeout(refreshSchedule, Math.max(0, nextMidnight - Date.now()));
-  let month, list;
+  let month, list, previousDate = null;
   for (const event of performances.filter(row => row.date >= today)) {
     const date = new Date(event.date + 'T12:00:00Z');
     const format = options => date.toLocaleDateString(en ? 'en-GB' : 'ru-RU', {...options,timeZone:'UTC'});
@@ -464,7 +464,10 @@ function render(lang) {
     const item = document.createElement('li');
     const when = document.createElement('time');
     when.dateTime = event.date;
-    when.textContent = format({day:'numeric',weekday:'short'});
+    const firstOfDate = event.date !== previousDate;
+     when.textContent = firstOfDate ? format({day:'numeric',weekday:'short'}) : '';
+     if (!firstOfDate) when.setAttribute('aria-label', en ? 'Same date as above' : 'Та же дата, что выше');
+     previousDate = event.date;
     item.append(when);
     if (poster) {
       const img = document.createElement('img');
