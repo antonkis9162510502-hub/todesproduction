@@ -196,7 +196,14 @@ ru:{home:'На главную',rider:'Технический райдер',techC
 en:{home:'Home',rider:'Technical rider',techContact:'Contact technical manager',techShort:'Tech manager',techDialogTitle:'Contact the technical manager',techDialogLead:'Questions about touring, technical riders or equipment? Send us a message.',techYourName:'Name',techYourEmail:'Email',techYourMessage:'Message',techSend:'Send message',techNote:'By sending this message, you provide contact details so we can respond to your technical inquiry.',full:'Full version',cut:'Cut version',title:'Tour schedule',tour:'Tours',note:'Preliminary tour calendar. Dates and locations may change. Check back for updates.',month:{'2026-11':'November 2026','2026-12':'December 2026','2027-01':'January 2027'},concerts:'shows',dates:'dates',venue:'Venue',time:'Start time',address:'Address',unknown:'To be confirmed',details:'Details at Artists & Stars'}};
 const venueData={"2026-11-15":{"venue":"ДК «Рассвет»","times":["15:00","19:00"],"address":"Улан-Удэ, ул. Краснодонская, 2а","url":"https://artzvezdy.ru/event/todes-ulan-ude-2"},"2026-11-17":{"venue":"Забайкальская краевая филармония","times":["19:00"]},"2026-11-19":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-20":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-23":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-24":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-25":{"venue":"ДК Авиастроителей","times":["19:00"]},"2026-11-27":{"venue":"«КОНЦЕРТ ХОЛЛ»","times":["19:00"]},"2026-11-28":{"venue":"Дом офицеров Уссурийского гарнизона «ДОРА»","times":["18:00"]},"2026-11-29":{"venue":"Дворец культуры угольщиков","times":["18:00"]},"2026-12-25":{"venue":"Центральный концертный зал","times":["19:00"]},"2026-12-27":{"venue":"Конгресс-холл ДГТУ","times":["17:00"]},"2026-12-28":{"venue":"Конгресс-холл ДГТУ","times":["19:00"]},"2027-01-04":{"venue":"Муниципальный культурный центр","times":["18:00"]},"2027-01-06":{"venue":"Филармония","times":["18:00"]},"2027-01-07":{"venue":"КДЦ «Губернский»","times":["18:00"]},"2027-01-08":{"venue":"ДК «БМЗ»","times":["18:00"]},"2027-01-22":{"venue":"ГДК","times":["19:00"]},"2027-01-23":{"venue":"ККДК «Подмосковье»","times":["19:00"]},"2027-01-24":{"venue":"ДК им. Гагарина","times":["18:00"]},"2027-01-26":{"venue":"ДК «Россия»","times":["19:00"]},"2027-01-27":{"venue":"ДК «Октябрь»","times":["19:30"]},"2027-01-28":{"venue":"ДК «Октябрь»","times":["19:00"]},"2027-01-29":{"venue":"Зимний театр","times":["19:00"]},"2027-01-30":{"venue":"КЦ «Зеленоград»","times":["18:00"]},"2027-01-31":{"venue":"ДК «Коломна»","times":["19:00"]}};
 const days={ru:['вс','пн','вт','ср','чт','пт','сб'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
-const months=[...new Set(events.map(e=>e.date.slice(0,7)))];
+// Keep tour dates consistent for all visitors, regardless of their time zone.
+const tourDateFormat=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'});
+function todayForTours(){
+ const parts=tourDateFormat.formatToParts(new Date());
+ const value=type=>parts.find(part=>part.type===type).value;
+ return value('year')+'-'+value('month')+'-'+value('day');
+}
+let displayedTourDate='';
 
 function makeMagicPlanetBanner(lang){
  const ru=lang==='ru';
@@ -226,6 +233,10 @@ function setLang(lang){
  document.getElementById('lang-group').setAttribute('aria-label',lang==='ru'?'Выбор языка':'Choose language');
  document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t[el.dataset.t]});
  document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===lang)));
+ const today=todayForTours();
+ displayedTourDate=today;
+ const upcomingEvents=events.filter(event=>event.date>=today);
+ const months=[...new Set(upcomingEvents.map(event=>event.date.slice(0,7)))];
  const target=document.getElementById('schedule');
  target.replaceChildren();
  for(const month of months){
@@ -245,7 +256,7 @@ function setLang(lang){
   const head=document.createElement('div');head.className='month-head';
   const h=document.createElement('h2');h.textContent=t.month[month]||month;
   head.append(h);section.append(head);
-  for(const e of events.filter(e=>e.date.startsWith(month))){
+  for(const e of upcomingEvents.filter(e=>e.date.startsWith(month))){
    if(e.date==='2026-12-24') section.append(makeMagicPlanetBanner(lang));
    const entry=document.createElement('details');entry.className='tour-entry';
    const row=document.createElement('summary');row.className='tour-row';
@@ -279,6 +290,12 @@ function setLang(lang){
 }
 document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>setLang(btn.dataset.lang)));
 setLang(new URLSearchParams(location.search).get('lang')==='en'?'en':'ru');
+// Advance automatically when the date changes, including in an already open tab.
+function refreshForNewDay(){
+ if(todayForTours()!==displayedTourDate) setLang(document.documentElement.lang==='en'?'en':'ru');
+}
+setInterval(refreshForNewDay,60000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshForNewDay()});
 })();
 </script>
 
