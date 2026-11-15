@@ -73,8 +73,7 @@ function setLang(lang){
   const section=document.createElement('section');section.className='month';
   const head=document.createElement('div');head.className='month-head';
   const h=document.createElement('h2');h.textContent=t.month[month]||month;
-  const small=document.createElement('small');small.textContent=events.filter(e=>e.date.startsWith(month)).length+' '+t.dates;
-  head.append(h,small);section.append(head);
+  head.append(h);section.append(head);
   for(const e of events.filter(e=>e.date.startsWith(month))){
    const entry=document.createElement('details');entry.className='tour-entry';
    const row=document.createElement('summary');row.className='tour-row';
