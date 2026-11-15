@@ -142,6 +142,17 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 .tech-dialog :focus-visible{outline:2px solid #b8c8d6;outline-offset:3px}
 @media(max-width:440px){.tech-dialog-inner{padding:23px}}
 
+
+/* TODES 40-year Kremlin anniversary artwork in the November 2027 tour section. */
+.kremlin-banner{display:block;position:relative;overflow:hidden;margin:22px 0 26px;border-radius:16px;text-decoration:none;background:#110709;box-shadow:0 12px 42px rgba(0,0,0,.24);transition:filter .2s ease}
+.kremlin-banner:hover{filter:brightness(1.07)}
+.kremlin-banner:focus-visible{outline:2px solid #bdb5bb;outline-offset:4px}
+.kremlin-banner img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:contain}
+.kremlin-banner .kremlin-fallback{display:none}
+.kremlin-banner.missing-image img{display:none}
+.kremlin-banner.missing-image .kremlin-fallback{display:flex;align-items:center;justify-content:center;min-height:155px;padding:25px;color:#f4f0f0;font-size:clamp(18px,3.4vw,34px);text-align:center;font-weight:650;letter-spacing:.04em;background:radial-gradient(ellipse at 50% 30%,#702026,#170b0e 78%)}
+@media(max-width:650px){.kremlin-banner{margin:16px 0 20px;border-radius:12px}.kremlin-banner.missing-image .kremlin-fallback{min-height:110px}}
+@media(prefers-reduced-motion:reduce){.kremlin-banner{transition:none}}
 </style>
 </head>
 <body>
@@ -191,10 +202,19 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 <script>
 (()=> {
 const events=JSON.parse(document.getElementById('schedule-data').textContent);
+// Jubilee concerts confirmed by the official Kremlin Palace programme.
+events.push(
+ {date:'2027-11-27',ru:'Москва — TODES 40 лет',en:'Moscow — TODES 40 Years',shows:1},
+ {date:'2027-11-28',ru:'Москва — TODES 40 лет',en:'Moscow — TODES 40 Years',shows:1}
+);
+events.sort((a,b)=>a.date.localeCompare(b.date));
 const dict={
-ru:{home:'На главную',rider:'Технический райдер',techContact:'Связаться с техническим менеджером',techShort:'Техменеджер',techDialogTitle:'Написать техническому менеджеру',techDialogLead:'Вопросы по гастролям, техническому райдеру и оборудованию — напишите нам.',techYourName:'Имя',techYourEmail:'Электронная почта',techYourMessage:'Сообщение',techSend:'Отправить сообщение',techNote:'Отправляя сообщение, вы передаёте контактные данные для ответа на технический запрос.',full:'Полная версия',cut:'Сокращённая версия',title:'Гастрольный график',tour:'Гастроли',note:'Предварительное расписание гастролей. Даты и города могут меняться. Следи за обновлениями.',month:{'2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026','2027-01':'Январь 2027'},concerts:'концерта',dates:'даты',venue:'Площадка',time:'Начало',address:'Адрес',unknown:'Уточняется',details:'Подробнее на сайте «Артисты и звёзды»'},
-en:{home:'Home',rider:'Technical rider',techContact:'Contact technical manager',techShort:'Tech manager',techDialogTitle:'Contact the technical manager',techDialogLead:'Questions about touring, technical riders or equipment? Send us a message.',techYourName:'Name',techYourEmail:'Email',techYourMessage:'Message',techSend:'Send message',techNote:'By sending this message, you provide contact details so we can respond to your technical inquiry.',full:'Full version',cut:'Cut version',title:'Tour schedule',tour:'Tours',note:'Preliminary tour calendar. Dates and locations may change. Check back for updates.',month:{'2026-11':'November 2026','2026-12':'December 2026','2027-01':'January 2027'},concerts:'shows',dates:'dates',venue:'Venue',time:'Start time',address:'Address',unknown:'To be confirmed',details:'Details at Artists & Stars'}};
+ru:{home:'На главную',rider:'Технический райдер',techContact:'Связаться с техническим менеджером',techShort:'Техменеджер',techDialogTitle:'Написать техническому менеджеру',techDialogLead:'Вопросы по гастролям, техническому райдеру и оборудованию — напишите нам.',techYourName:'Имя',techYourEmail:'Электронная почта',techYourMessage:'Сообщение',techSend:'Отправить сообщение',techNote:'Отправляя сообщение, вы передаёте контактные данные для ответа на технический запрос.',full:'Полная версия',cut:'Сокращённая версия',title:'Гастрольный график',tour:'Гастроли',note:'Предварительное расписание гастролей. Даты и города могут меняться. Следи за обновлениями.',month:{'2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026','2027-01':'Январь 2027','2027-11':'Ноябрь 2027'},concerts:'концерта',dates:'даты',venue:'Площадка',time:'Начало',address:'Адрес',unknown:'Уточняется',details:'Подробнее на сайте «Артисты и звёзды»'},
+en:{home:'Home',rider:'Technical rider',techContact:'Contact technical manager',techShort:'Tech manager',techDialogTitle:'Contact the technical manager',techDialogLead:'Questions about touring, technical riders or equipment? Send us a message.',techYourName:'Name',techYourEmail:'Email',techYourMessage:'Message',techSend:'Send message',techNote:'By sending this message, you provide contact details so we can respond to your technical inquiry.',full:'Full version',cut:'Cut version',title:'Tour schedule',tour:'Tours',note:'Preliminary tour calendar. Dates and locations may change. Check back for updates.',month:{'2026-11':'November 2026','2026-12':'December 2026','2027-01':'January 2027','2027-11':'November 2027'},concerts:'shows',dates:'dates',venue:'Venue',time:'Start time',address:'Address',unknown:'To be confirmed',details:'Details at Artists & Stars'}};
 const venueData={"2026-11-15":{"venue":"ДК «Рассвет»","times":["15:00","19:00"],"address":"Улан-Удэ, ул. Краснодонская, 2а","url":"https://artzvezdy.ru/event/todes-ulan-ude-2"},"2026-11-17":{"venue":"Забайкальская краевая филармония","times":["19:00"]},"2026-11-19":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-20":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-23":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-24":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-25":{"venue":"ДК Авиастроителей","times":["19:00"]},"2026-11-27":{"venue":"«КОНЦЕРТ ХОЛЛ»","times":["19:00"]},"2026-11-28":{"venue":"Дом офицеров Уссурийского гарнизона «ДОРА»","times":["18:00"]},"2026-11-29":{"venue":"Дворец культуры угольщиков","times":["18:00"]},"2026-12-25":{"venue":"Центральный концертный зал","times":["19:00"]},"2026-12-27":{"venue":"Конгресс-холл ДГТУ","times":["17:00"]},"2026-12-28":{"venue":"Конгресс-холл ДГТУ","times":["19:00"]},"2027-01-04":{"venue":"Муниципальный культурный центр","times":["18:00"]},"2027-01-06":{"venue":"Филармония","times":["18:00"]},"2027-01-07":{"venue":"КДЦ «Губернский»","times":["18:00"]},"2027-01-08":{"venue":"ДК «БМЗ»","times":["18:00"]},"2027-01-22":{"venue":"ГДК","times":["19:00"]},"2027-01-23":{"venue":"ККДК «Подмосковье»","times":["19:00"]},"2027-01-24":{"venue":"ДК им. Гагарина","times":["18:00"]},"2027-01-26":{"venue":"ДК «Россия»","times":["19:00"]},"2027-01-27":{"venue":"ДК «Октябрь»","times":["19:30"]},"2027-01-28":{"venue":"ДК «Октябрь»","times":["19:00"]},"2027-01-29":{"venue":"Зимний театр","times":["19:00"]},"2027-01-30":{"venue":"КЦ «Зеленоград»","times":["18:00"]},"2027-01-31":{"venue":"ДК «Коломна»","times":["19:00"]}};
+// Exact venue and start time for both jubilee performances.
+venueData['2027-11-27']={venue:'Государственный Кремлёвский дворец, Большой зал',times:['18:00'],address:'Москва, Кремль, Государственный Кремлёвский дворец',url:'https://kremlinpalace.org/?page=5'};
+venueData['2027-11-28']={venue:'Государственный Кремлёвский дворец, Большой зал',times:['18:00'],address:'Москва, Кремль, Государственный Кремлёвский дворец',url:'https://kremlinpalace.org/events/yubileynyy-koncert-posvyashchennyy-40-letiyu-baleta-ally-duhovoy-todes-1'};
 const days={ru:['вс','пн','вт','ср','чт','пт','сб'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
 // Keep tour dates consistent for all visitors, regardless of their time zone.
 const tourDateFormat=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Moscow',year:'numeric',month:'2-digit',day:'2-digit'});
@@ -221,6 +241,27 @@ function makeMagicPlanetBanner(lang){
  img.loading='lazy';
  img.decoding='async';
  banner.append(img);
+ return banner;
+}
+function makeKremlinBanner(lang){
+ const ru=lang==='ru';
+ const banner=document.createElement('a');
+ banner.className='kremlin-banner';
+ banner.href='https://kremlinpalace.org/events/yubileynyy-koncert-posvyashchennyy-40-letiyu-baleta-ally-duhovoy-todes-1';
+ banner.target='_blank';
+ banner.rel='noopener noreferrer';
+ banner.setAttribute('aria-label',ru?'TODES 40 лет — юбилейный концерт в Кремле, 27 и 28 ноября 2027 года':'TODES 40 Years — Kremlin Palace concert, 27 and 28 November 2027');
+ const img=document.createElement('img');
+ // Image is hosted on Drive; an accessible fallback appears until its public-view permission is enabled.
+ img.src='https://drive.google.com/thumbnail?id=1vQvwndifNBwd1eEYlUjrhpdVONyWaa2c&sz=w1774';
+ img.width=1774;img.height=887;
+ img.alt=ru?'TODES 40 лет — юбилейный концерт, 27–28 ноября 2027':'TODES 40 Years — anniversary concert, 27–28 November 2027';
+ img.loading='lazy';img.decoding='async';
+ img.addEventListener('error',()=>banner.classList.add('missing-image'));
+ const fallback=document.createElement('span');
+ fallback.className='kremlin-fallback';
+ fallback.textContent=ru?'TODES 40 лет · 27 и 28 ноября 2027 · Кремлёвский дворец':'TODES 40 Years · 27–28 November 2027 · Kremlin Palace';
+ banner.append(img,fallback);
  return banner;
 }
 function setLang(lang){
@@ -258,6 +299,7 @@ function setLang(lang){
   head.append(h);section.append(head);
   for(const e of upcomingEvents.filter(e=>e.date.startsWith(month))){
    if(e.date==='2026-12-24') section.append(makeMagicPlanetBanner(lang));
+    if(e.date==='2027-11-27') section.append(makeKremlinBanner(lang));
    const entry=document.createElement('details');entry.className='tour-entry';
    const row=document.createElement('summary');row.className='tour-row';
    const date=document.createElement('div');date.className='tour-date';
