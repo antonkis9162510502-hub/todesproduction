@@ -93,6 +93,29 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
  .rider-options{min-width:min(260px,calc(100vw - 44px))}
 }
 
+/* Direct email contact for the tour technical manager */
+.tech-contact{flex-shrink:0}
+.tech-contact-short{display:none}
+@media(max-width:850px) and (min-width:601px){
+ .tech-contact-long{display:none}
+ .tech-contact-short{display:inline}
+}
+@media(max-width:600px){
+ header{
+   height:auto;min-height:76px;padding:12px 0;
+   display:grid;grid-template-columns:max-content minmax(0,1fr) auto;
+   grid-template-areas:"home spare lang" "rider tech tech";
+   gap:9px 8px;align-items:center
+ }
+ #home-link{grid-area:home;justify-self:start}
+ .rider-picker{grid-area:rider;justify-self:start}
+ .tech-contact{grid-area:tech;justify-self:start}
+ .right{grid-area:lang;justify-self:end}
+ .tech-contact-long{display:none}
+ .tech-contact-short{display:inline}
+ .tech-contact{padding:10px 11px}
+}
+
 </style>
 </head>
 <body>
@@ -106,6 +129,7 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
   <a href="https://drive.google.com/file/d/1l1OTuMrKVpyQM0n5h2oPMdh8crhnNU7P/view" target="_blank" rel="noopener noreferrer"><strong>CUT VERSION</strong><span data-t="cut">Сокращённая версия</span></a>
  </nav>
 </details>
+<a id="tech-contact" class="back tech-contact" href="mailto:aleksssander007@yandex.ru" aria-label="Связаться с техническим менеджером"><span class="tech-contact-long" data-t="techContact">Связаться с техническим менеджером</span><span class="tech-contact-short" data-t="techShort" aria-hidden="true">Техменеджер</span></a>
 <div class="right"><div class="lang" role="group" aria-label="Выбор языка" id="lang-group"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
 </header>
 <main>
@@ -122,8 +146,8 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 (()=> {
 const events=JSON.parse(document.getElementById('schedule-data').textContent);
 const dict={
-ru:{home:'На главную',rider:'Технический райдер',full:'Полная версия',cut:'Сокращённая версия',title:'Гастрольный график',tour:'Гастроли',note:'Предварительное расписание гастролей. Даты и города могут меняться. Следи за обновлениями.',month:{'2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026','2027-01':'Январь 2027'},concerts:'концерта',dates:'даты',venue:'Площадка',time:'Начало',address:'Адрес',unknown:'Уточняется',details:'Подробнее на сайте «Артисты и звёзды»'},
-en:{home:'Home',rider:'Technical rider',full:'Full version',cut:'Cut version',title:'Tour schedule',tour:'Tours',note:'Preliminary tour calendar. Dates and locations may change. Check back for updates.',month:{'2026-11':'November 2026','2026-12':'December 2026','2027-01':'January 2027'},concerts:'shows',dates:'dates',venue:'Venue',time:'Start time',address:'Address',unknown:'To be confirmed',details:'Details at Artists & Stars'}};
+ru:{home:'На главную',rider:'Технический райдер',techContact:'Связаться с техническим менеджером',techShort:'Техменеджер',full:'Полная версия',cut:'Сокращённая версия',title:'Гастрольный график',tour:'Гастроли',note:'Предварительное расписание гастролей. Даты и города могут меняться. Следи за обновлениями.',month:{'2026-11':'Ноябрь 2026','2026-12':'Декабрь 2026','2027-01':'Январь 2027'},concerts:'концерта',dates:'даты',venue:'Площадка',time:'Начало',address:'Адрес',unknown:'Уточняется',details:'Подробнее на сайте «Артисты и звёзды»'},
+en:{home:'Home',rider:'Technical rider',techContact:'Contact technical manager',techShort:'Tech manager',full:'Full version',cut:'Cut version',title:'Tour schedule',tour:'Tours',note:'Preliminary tour calendar. Dates and locations may change. Check back for updates.',month:{'2026-11':'November 2026','2026-12':'December 2026','2027-01':'January 2027'},concerts:'shows',dates:'dates',venue:'Venue',time:'Start time',address:'Address',unknown:'To be confirmed',details:'Details at Artists & Stars'}};
 const venueData={"2026-11-15":{"venue":"ДК «Рассвет»","times":["15:00","19:00"],"address":"Улан-Удэ, ул. Краснодонская, 2а","url":"https://artzvezdy.ru/event/todes-ulan-ude-2"},"2026-11-17":{"venue":"Забайкальская краевая филармония","times":["19:00"]},"2026-11-19":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-20":{"venue":"Общественно-культурный центр","times":["19:00"]},"2026-11-23":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-24":{"venue":"Городской дворец культуры","times":["19:00"]},"2026-11-25":{"venue":"ДК Авиастроителей","times":["19:00"]},"2026-11-27":{"venue":"«КОНЦЕРТ ХОЛЛ»","times":["19:00"]},"2026-11-28":{"venue":"Дом офицеров Уссурийского гарнизона «ДОРА»","times":["18:00"]},"2026-11-29":{"venue":"Дворец культуры угольщиков","times":["18:00"]},"2026-12-25":{"venue":"Центральный концертный зал","times":["19:00"]},"2026-12-27":{"venue":"Конгресс-холл ДГТУ","times":["17:00"]},"2026-12-28":{"venue":"Конгресс-холл ДГТУ","times":["19:00"]},"2027-01-04":{"venue":"Муниципальный культурный центр","times":["18:00"]},"2027-01-06":{"venue":"Филармония","times":["18:00"]},"2027-01-07":{"venue":"КДЦ «Губернский»","times":["18:00"]},"2027-01-08":{"venue":"ДК «БМЗ»","times":["18:00"]},"2027-01-22":{"venue":"ГДК","times":["19:00"]},"2027-01-23":{"venue":"ККДК «Подмосковье»","times":["19:00"]},"2027-01-24":{"venue":"ДК им. Гагарина","times":["18:00"]},"2027-01-26":{"venue":"ДК «Россия»","times":["19:00"]},"2027-01-27":{"venue":"ДК «Октябрь»","times":["19:30"]},"2027-01-28":{"venue":"ДК «Октябрь»","times":["19:00"]},"2027-01-29":{"venue":"Зимний театр","times":["19:00"]},"2027-01-30":{"venue":"КЦ «Зеленоград»","times":["18:00"]},"2027-01-31":{"venue":"ДК «Коломна»","times":["19:00"]}};
 const days={ru:['вс','пн','вт','ср','чт','пт','сб'],en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat']};
 const months=[...new Set(events.map(e=>e.date.slice(0,7)))];
@@ -152,6 +176,7 @@ function setLang(lang){
  document.title=t.title+' — TODESPRODUCTION';
  document.getElementById('site-description').content='TODESPRODUCTION — '+t.title;
  document.getElementById('home-link').href='index.html?lang='+lang;
+ document.getElementById('tech-contact').setAttribute('aria-label',t.techContact);
  document.getElementById('lang-group').setAttribute('aria-label',lang==='ru'?'Выбор языка':'Choose language');
  document.querySelectorAll('[data-t]').forEach(el=>{el.textContent=t[el.dataset.t]});
  document.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===lang)));
