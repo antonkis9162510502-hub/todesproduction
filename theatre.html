@@ -407,6 +407,13 @@ const performances = [
     "time": "14:00 · 18:00"
   }
 ];
+const moscowDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Moscow' });
+let midnightTimer;
+
+function refreshSchedule() {
+  render(document.documentElement.lang);
+}
+
 function render(lang) {
   const en = lang === 'en';
   document.documentElement.lang = lang;
@@ -419,7 +426,10 @@ function render(lang) {
   document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', button.dataset.lang === lang));
   const schedule = document.querySelector('#schedule');
   schedule.replaceChildren();
-  const today = new Intl.DateTimeFormat('sv-SE', { timeZone:'Europe/Moscow' }).format(new Date());
+  const today = moscowDate.format(new Date());
+  const nextMidnight = Date.parse(today + 'T00:00:00+03:00') + 86400000;
+  clearTimeout(midnightTimer);
+  midnightTimer = setTimeout(refreshSchedule, Math.max(0, nextMidnight - Date.now()));
   let month, list;
   for (const event of performances.filter(row => row.date >= today)) {
     const date = new Date(event.date + 'T12:00:00Z');
@@ -468,5 +478,9 @@ document.querySelectorAll('[data-lang]').forEach(button => button.onclick = () =
   history.replaceState(null,'','?lang=' + lang);
   render(lang);
 });
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) refreshSchedule();
+});
+window.addEventListener('pageshow', refreshSchedule);
 render(new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ru');
 </script></body></html>
