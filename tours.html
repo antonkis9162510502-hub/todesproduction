@@ -46,8 +46,9 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 .poster.is-paused .poster-glint::before,.poster.is-paused .poster-stageglow,.poster.is-paused .poster-haze,.poster.is-paused .poster-fabricglow{animation-play-state:paused}
 /* On reduced-motion devices, retain a gentle change of light without moving layers. */
 @media(prefers-reduced-motion:reduce){
-.poster-glint::before,.poster-haze,.poster-fabricglow{animation:none}
-.poster-glint::before{opacity:.18;transform:translate3d(0,0,0)}
+.poster-haze,.poster-fabricglow{animation:none}
+.poster-glint{opacity:.38}
+.poster-glint::before{animation:poster-metal-sweep 13.4s ease-in-out infinite}
 .poster-haze{opacity:.17;transform:none}.poster-fabricglow{opacity:.17;transform:none}
 .poster-stageglow{animation:poster-light-breathe 12s ease-in-out infinite}
 }
