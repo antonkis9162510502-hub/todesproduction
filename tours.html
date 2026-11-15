@@ -252,8 +252,8 @@ function makeKremlinBanner(lang){
  banner.rel='noopener noreferrer';
  banner.setAttribute('aria-label',ru?'TODES 40 лет — юбилейный концерт в Кремле, 27 и 28 ноября 2027 года':'TODES 40 Years — Kremlin Palace concert, 27 and 28 November 2027');
  const img=document.createElement('img');
- // Image is hosted on Drive; an accessible fallback appears until its public-view permission is enabled.
- img.src='https://drive.google.com/thumbnail?id=1vQvwndifNBwd1eEYlUjrhpdVONyWaa2c&sz=w1774';
+ // The banner is served from this site so it loads reliably on desktop and mobile.
+ img.src='kremlin-todes-40.png';
  img.width=1774;img.height=887;
  img.alt=ru?'TODES 40 лет — юбилейный концерт, 27–28 ноября 2027':'TODES 40 Years — anniversary concert, 27–28 November 2027';
  img.loading='lazy';img.decoding='async';
