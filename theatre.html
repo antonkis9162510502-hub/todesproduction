@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Театр — TODESPRODUCTION</title><style>
+
+:root{color-scheme:dark;--bg:#090b0e;--text:#f1f1ee;--muted:#a4a9ae;--line:#2a2e33;--metal:#bcc5cd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(114,135,158,.11),transparent 48%)}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}.wrap{width:min(1010px,calc(100% - 44px));margin:auto;position:relative}
+header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.back{font-size:11px;letter-spacing:.11em;color:#e7ebef;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 20px;border:1px solid #59646e;border-radius:999px;background:linear-gradient(145deg,rgba(158,172,185,.2),rgba(31,38,45,.58));box-shadow:inset 0 1px 0 rgba(255,255,255,.13);transition:border-color .2s,background .2s,transform .2s}.back:hover,.back:focus-visible{color:#fff;border-color:#aebbc6;background:linear-gradient(145deg,rgba(176,190,203,.3),rgba(46,56,67,.72))}.back:active{transform:translateY(1px)}
+.right{display:flex;align-items:center;gap:15px}.lang{display:flex;gap:3px;align-items:center;padding:3px;border:1px solid #343b42;border-radius:999px;background:rgba(10,13,17,.7)}.lang button{min-width:38px;height:28px;border:0;border-radius:999px;background:transparent;color:#939da7;font-size:11px;font-weight:750}.lang button[aria-pressed=true]{background:linear-gradient(145deg,#e4e8ed,#aab4bd);color:#101419;box-shadow:0 1px 8px rgba(185,205,225,.22)}
+.intro{padding:80px 0 52px}.kicker{margin:0 0 19px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}.intro h1{font-size:clamp(39px,6vw,70px);line-height:1.07;font-weight:600;letter-spacing:-.055em;margin:0 0 22px}.lead{font-size:14px;line-height:1.75;color:#9fa9b1;max-width:660px;margin:0}
+
+section.month{margin:0 0 42px}h2{font-size:20px;text-transform:capitalize}ul{padding:0;list-style:none}li{display:grid;grid-template-columns:6em minmax(55px,92px) 1fr;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}time,small{color:var(--muted);font-size:14px}li img{width:100%;aspect-ratio:14/9;object-fit:cover;border-radius:5px;background:#21262c}li strong{font-size:clamp(16px,2vw,23px)}li small{display:block;margin-top:4px}@media(max-width:540px){.wrap{width:calc(100% - 32px)}li{grid-template-columns:4em 60px 1fr;gap:10px}.intro{padding:40px 0 12px}}
+</style></head><body><div class="wrap"><header><a class="back" id="home" href="index.html">← На главную</a><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>Театр</h1></section><div id="schedule"></div></main></div><script>
+const shows = [
+  [
+    "#Продолжение",
+    "#Continuation",
+    "44e82f9790e8008e9fce1ed54d6c6c16"
+  ],
+  [
+    "Арт",
+    "Art",
+    "d29e4b251ea3e2a3b2086a10614ef2ff"
+  ],
+  [
+    "Инзэнайт",
+    "In the Night",
+    "3b608e32580a57dd9f7363a6ab68c536"
+  ],
+  [
+    "До встречи в сказке",
+    "See You in a Fairy Tale",
+    "cc77ac026951d728bf195822f587b477"
+  ],
+  [
+    "Танцуем любовь",
+    "Dancing Love",
+    "699e6f04ae81670c931c6362ddbbedc6"
+  ],
+  [
+    "Волшебная планета",
+    "Magic Planet",
+    "08b0307a1748ab7d14fe5d56c4c73f53"
+  ],
+  [
+    "И приснится же такое…",
+    "What a Dream…",
+    "e89d0b756e9d4d4e8dfe2dfd893982f7"
+  ],
+  [
+    "Мы из будущего",
+    "We Are from the Future",
+    "3bda41042153fbf1acb9d9c602fb12fa"
+  ]
+];
+const performances = [
+  {
+    "date": "2026-11-18",
+    "i": 0,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-11-19",
+    "i": 1,
+    "count": 1,
+    "time": "20:00"
+  },
+  {
+    "date": "2026-11-20",
+    "i": 0,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-11-25",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-11-27",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-11-28",
+    "i": 3,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-11-28",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-02",
+    "i": 4,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-03",
+    "i": 1,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-04",
+    "i": 4,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-05",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-05",
+    "i": 4,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-09",
+    "i": 6,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-10",
+    "i": 1,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-11",
+    "i": 6,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-12",
+    "i": 3,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-12",
+    "i": 6,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-16",
+    "i": 0,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-18",
+    "i": 0,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-19",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-19",
+    "i": 0,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-23",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-24",
+    "i": 1,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-25",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-26",
+    "i": 3,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-26",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-27",
+    "i": 2,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-30",
+    "i": 7,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2026-12-31",
+    "i": 7,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-02",
+    "i": 3,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-02",
+    "i": 2,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-03",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-03",
+    "i": 0,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-04",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-04",
+    "i": 7,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-05",
+    "i": 3,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-05",
+    "i": 6,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-06",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-06",
+    "i": 7,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-07",
+    "i": 2,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-08",
+    "i": 5,
+    "count": 1,
+    "time": ""
+  },
+  {
+    "date": "2027-01-08",
+    "i": 0,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-09",
+    "i": 7,
+    "count": 2,
+    "time": ""
+  },
+  {
+    "date": "2027-01-10",
+    "i": 2,
+    "count": 2,
+    "time": ""
+  }
+];
+function render(lang) {
+  const en = lang === 'en';
+  document.documentElement.lang = lang;
+  const title = en ? 'Theatre' : 'Театр';
+  document.querySelector('h1').textContent = title;
+  document.title = title + ' — TODESPRODUCTION';
+  const home = document.querySelector('#home');
+  home.href = 'index.html?lang=' + lang;
+  home.textContent = en ? '← Home' : '← На главную';
+  document.querySelectorAll('[data-lang]').forEach(button => button.setAttribute('aria-pressed', button.dataset.lang === lang));
+  const schedule = document.querySelector('#schedule');
+  schedule.replaceChildren();
+  const today = new Intl.DateTimeFormat('sv-SE', { timeZone:'Europe/Moscow' }).format(new Date());
+  let month, list;
+  for (const event of performances.filter(row => row.date >= today)) {
+    const date = new Date(event.date + 'T12:00:00Z');
+    const format = options => date.toLocaleDateString(en ? 'en-GB' : 'ru-RU', {...options,timeZone:'UTC'});
+    if (month !== event.date.slice(0,7)) {
+      month = event.date.slice(0,7);
+      const section = document.createElement('section');
+      section.className = 'month';
+      const heading = document.createElement('h2');
+      heading.textContent = format({month:'long',year:'numeric'});
+      list = document.createElement('ul');
+      section.append(heading,list);
+      schedule.append(section);
+    }
+    const [ru, english, hash] = shows[event.i];
+    const item = document.createElement('li');
+    const when = document.createElement('time');
+    when.dateTime = event.date;
+    when.textContent = format({day:'numeric',weekday:'short'});
+    const img = document.createElement('img');
+    img.alt = '';
+    img.loading = 'lazy';
+    img.src = 'https://media.ticketland.ru/images/420x270/' + hash.slice(0,2) + '/' + hash.slice(2,4) + '/' + hash + '.jpg';
+    const details = document.createElement('div');
+    const name = document.createElement('strong');
+    name.textContent = en ? english : ru;
+    details.append(name);
+    if (event.time || event.count > 1) {
+      const info = document.createElement('small');
+      info.textContent = event.time || (event.count + (en ? ' performances' : ' показа'));
+      details.append(info);
+    }
+    item.append(when,img,details);
+    list.append(item);
+  }
+  if (!list) schedule.textContent = en ? 'New dates will appear here.' : 'Здесь появятся новые даты.';
+}
+document.querySelectorAll('[data-lang]').forEach(button => button.onclick = () => {
+  const lang = button.dataset.lang;
+  history.replaceState(null,'','?lang=' + lang);
+  render(lang);
+});
+render(new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'ru');
+</script></body></html>
