@@ -143,6 +143,29 @@
       .hero { min-height:calc(100svh - 160px); }
       .pill { padding:8px 10px; font-size:10px; }
     }
+
+    /* Contact form modal: responsive and accessible */
+    .header-link { background:transparent; cursor:pointer; }
+    .footer-contact { background:none; border:0; border-bottom:1px solid #454b52; padding:0 0 3px; color:#bec2c6; font-size:inherit; letter-spacing:inherit; cursor:pointer; }
+    .footer-contact:hover { color:#fff; }
+    .contact-dialog { position:fixed; width:min(510px,calc(100% - 28px)); max-height:calc(100dvh - 28px); overflow-y:auto; margin:auto; padding:0; border:1px solid #444b54; border-radius:9px; background:#14181d; color:#f1f1ee; box-shadow:0 30px 100px rgba(0,0,0,.6); }
+    .contact-dialog::backdrop { background:rgba(0,0,0,.78); backdrop-filter:blur(5px); }
+    .contact-dialog-inner { position:relative; padding:clamp(23px,5vw,40px); }
+    .contact-dialog-kicker { margin:0 45px 12px 0; color:#aab6c0; letter-spacing:.17em; font-size:11px; font-weight:700; }
+    .contact-dialog h2 { margin:0 35px 9px 0; font-size:clamp(28px,6vw,38px); line-height:1.12; }
+    .contact-dialog-lead { margin:0 0 20px; font-size:13px; line-height:1.65; color:#aab0b6; }
+    .contact-close { position:absolute; right:19px; top:18px; display:grid; place-items:center; width:36px; height:36px; background:transparent; color:#d3d7dc; border:1px solid #424a52; border-radius:50%; font-size:26px; line-height:1; cursor:pointer; }
+    .contact-close:hover { background:#28313a; }
+    .contact-dialog .field { margin:14px 0; }
+    .contact-dialog .field input,.contact-dialog .field textarea { background:#0b0e11; border-color:#454c53; }
+    .contact-dialog .field textarea { min-height:115px; }
+    .contact-dialog .send-btn { width:100%; margin-top:8px; }
+    .contact-dialog .send-btn:disabled { opacity:.6; cursor:wait; }
+    .contact-dialog .contact-status { color:#cbd6e0; line-height:1.55; font-size:13px; margin:12px 0 0; }
+    .contact-dialog .contact-status:empty { display:none; }
+    .contact-dialog .contact-note { margin:15px 0 0; font-size:11px; color:#939aa2; line-height:1.6; }
+    .bot-field { position:absolute !important; width:1px; height:1px; opacity:0; left:-9999px; overflow:hidden; pointer-events:none; }
+    @media (max-width:440px) { .contact-dialog-inner { padding:23px; } }
 </style>
 </head>
 <body>
@@ -150,7 +173,7 @@
 <header class="header">
 <a aria-label="TODESPRODUCTION — в начало" class="brand" href="#top" data-i18n-aria="home"><span aria-hidden="true" class="brand-mark">TDP</span><span>TODESPRODUCTION</span></a>
 <div class="header-right">
-  <a class="header-link" href="#contact" data-i18n="contact">Контакты</a>
+  <button class="header-link contact-open" type="button" data-i18n="contact">Контакты</button>
   <div class="language-switch" role="group" aria-label="Выбор языка" data-i18n-aria="language">
     <button type="button" data-lang="ru" aria-pressed="true" aria-label="Русский">RU</button>
     <button type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
@@ -165,8 +188,27 @@
 </section>
 
 </main>
-<footer class="footer"><span><strong>TODESPRODUCTION</strong> © 2026</span><span id="contact"><a href="mailto:info@todesproduction.com">info@todesproduction.com</a></span></footer>
+<footer class="footer"><span><strong>TODESPRODUCTION</strong> © 2026</span><button class="footer-contact contact-open" type="button" data-i18n="write">Написать нам</button></footer>
 </div>
+
+<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+  <div class="contact-dialog-inner">
+    <button type="button" class="contact-close" id="contact-close" aria-label="Закрыть" title="Закрыть">×</button>
+    <p class="contact-dialog-kicker">TODESPRODUCTION</p>
+    <h2 id="contact-dialog-title" data-i18n="write">Написать нам</h2>
+    <p class="contact-dialog-lead" data-i18n="contactLead">Расскажи о проекте — мы свяжемся с тобой по электронной почте.</p>
+    <form name="contact" id="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="bot-field" aria-hidden="true"><label>Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="field"><span data-i18n="yourName">Имя</span><input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+      <label class="field"><span data-i18n="yourEmail">Электронная почта</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+      <label class="field"><span data-i18n="yourMessage">Сообщение</span><textarea name="message" maxlength="5000" required></textarea></label>
+      <button type="submit" class="btn btn-primary send-btn" data-i18n="sendMessage">Отправить сообщение</button>
+      <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="contact-note" data-i18n="contactNote">Нажимая «Отправить», ты передаёшь нам данные для ответа на обращение.</p>
+  </div>
+</dialog>
 
 <script>
     // Switch every visitor-facing label while preserving the metallic brand graphic.
@@ -176,13 +218,19 @@
           contact:'Контакты', concerts:'Концерты', tours:'Гастроли', events:'Фест', theatre:'Театр',
           home:'TODESPRODUCTION — в начало', language:'Выбор языка',
           categories:'Направления работы', logo:'Объёмный металлический логотип TODES PRODUCTION',
-          description:'TODESPRODUCTION — концерты, гастроли, мероприятия.'
+          description:'TODESPRODUCTION — концерты, гастроли, мероприятия.',
+           write:'Написать нам', contactLead:'Расскажи о проекте — мы свяжемся с тобой по электронной почте.',
+           yourName:'Имя', yourEmail:'Электронная почта', yourMessage:'Сообщение',
+           sendMessage:'Отправить сообщение', contactNote:'Нажимая «Отправить», ты передаёшь нам данные для ответа на обращение.'
         },
         en: {
           contact:'Contact', concerts:'Concerts', tours:'Tours', events:'Fest', theatre:'Theatre',
           home:'TODESPRODUCTION — Back to top', language:'Choose language',
           categories:'Our services', logo:'Three-dimensional metallic TODES PRODUCTION logo',
-          description:'TODESPRODUCTION — concerts, tours and events.'
+          description:'TODESPRODUCTION — concerts, tours and events.',
+           write:'Contact us', contactLead:'Tell us about your project — we will reply by email.',
+           yourName:'Name', yourEmail:'Email address', yourMessage:'Message',
+           sendMessage:'Send message', contactNote:'By sending this message, you share your details so we can reply.'
         }
       };
       function setLanguage(lang) {
@@ -201,6 +249,49 @@
         el.addEventListener('click', () => setLanguage(el.dataset.lang));
       });
       setLanguage('ru');
+    })();
+
+
+    // Open the modal from the navigation/footer; use native Escape and focus handling.
+    (() => {
+      const modal = document.getElementById('contact-dialog');
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('contact-status');
+      const submit = form.querySelector('[type="submit"]');
+      const messages = {
+        ru: {sending:'Отправляем…', sent:'Спасибо! Сообщение отправлено.', error:'Не удалось отправить сообщение. Попробуй ещё раз чуть позже.'},
+        en: {sending:'Sending…', sent:'Thank you! Your message has been sent.', error:'We could not send your message. Please try again later.'}
+      };
+      const getMessages = () => messages[document.documentElement.lang] || messages.ru;
+      document.querySelectorAll('.contact-open').forEach(button => {
+        button.addEventListener('click', () => {
+          status.textContent = '';
+          if (!modal.open) modal.showModal();
+          form.querySelector('[name="name"]').focus();
+        });
+      });
+      document.getElementById('contact-close').addEventListener('click', () => modal.close());
+      modal.addEventListener('click', event => { if (event.target === modal) modal.close(); });
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (!form.reportValidity() || submit.disabled) return;
+        status.textContent = getMessages().sending;
+        submit.disabled = true;
+        try {
+          const response = await fetch('/', {
+            method:'POST',
+            headers:{'Content-Type':'application/x-www-form-urlencoded'},
+            body:new URLSearchParams(new FormData(form)).toString()
+          });
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          status.textContent = getMessages().sent;
+          form.reset();
+        } catch (error) {
+          status.textContent = getMessages().error;
+        } finally {
+          submit.disabled = false;
+        }
+      });
     })();
 
     // Duplicate the original transparent logo without downloading a second asset.
