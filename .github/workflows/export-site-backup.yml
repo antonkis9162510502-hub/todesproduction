@@ -1,0 +1,27 @@
+name: Export site backup
+on:
+  push:
+    branches: [backup-2026-11-16]
+  workflow_dispatch:
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload complete static site
+        uses: actions/upload-artifact@v4
+        with:
+          name: todesproduction-site-2026-11-16
+          path: |
+            index.html
+            events.html
+            theatre.html
+            tours.html
+            *.png
+            *.svg
+            *.webp
+            README.md
+          if-no-files-found: error
+          retention-days: 7
