@@ -39,14 +39,18 @@ const dateClock=new Intl.DateTimeFormat("sv-SE",{timeZone:"Europe/Moscow",year:"
 let midnightTimer;
 function dateObj(s){return new Date(s+"T12:00:00Z")}
 function textDate(d,lang,options){return dateObj(d).toLocaleDateString(lang==="en"?"en-GB":"ru-RU",{...options,timeZone:"UTC"})}
-function dateLabel(e,lang){
- const start=e[0],end=e[1],uncertain=e[8]===true;
- if(uncertain)return lang==="en"?"27 or 28 Mar":"27 или 28 мар";
- const startLabel=textDate(start,lang,{day:"numeric",weekday:"short"});
- if(!end)return startLabel;
- const endLabel=textDate(end,lang,{day:"numeric",weekday:"short"});
- if(start.slice(0,7)===end.slice(0,7))return startLabel+" – "+endLabel;
- return textDate(start,lang,{day:"numeric",month:"short"})+" – "+textDate(end,lang,{day:"numeric",month:"short"});
+// Each actual calendar day gets its own event row; uncertain alternative dates stay one row.
+const dailyEvents=events.flatMap((event,sourceIndex)=>{
+ if(!event[1] || event[8]===true)return [{event,date:event[0],sourceIndex}];
+ const result=[];
+ for(let day=dateObj(event[0]);day<=dateObj(event[1]);day.setUTCDate(day.getUTCDate()+1)){
+  result.push({event,date:day.toISOString().slice(0,10),sourceIndex});
+ }
+ return result;
+}).sort((a,b)=>a.date.localeCompare(b.date)||a.sourceIndex-b.sourceIndex);
+function dateLabel(day,lang,uncertain){
+ if(uncertain)return lang==="en"?"27 or 28":"27 или 28";
+ return textDate(day,lang,{day:"numeric",weekday:"short"});
 }
 function thumbnail(e){
  const kind=e[4],logo=e[5],box=document.createElement("div");box.className="thumb";box.dataset.type=kind;
@@ -73,22 +77,23 @@ function render(lang){
  clearTimeout(midnightTimer);
  midnightTimer=setTimeout(()=>render(document.documentElement.lang),Math.max(1000,Date.parse(today+"T00:00:00+03:00")+86400000-Date.now()));
  let currentMonth="",list=null,previousDate="";
- for(const e of events){
-  if((e[1]||e[0])<today)continue;
-  const month=e[0].slice(0,7);
+ for(const occurrence of dailyEvents){
+  const e=occurrence.event,eventDate=occurrence.date;
+  if(eventDate<today)continue;
+  const month=eventDate.slice(0,7);
   if(month!==currentMonth){
    currentMonth=month;previousDate="";
    const section=document.createElement("section");section.className="month";
-   const title=document.createElement("h2");title.textContent=textDate(e[0],lang,{month:"long",year:"numeric"});
+   const title=document.createElement("h2");title.textContent=textDate(eventDate,lang,{month:"long",year:"numeric"});
    list=document.createElement("ul");section.append(title,list);area.append(section);
   }
-  const li=document.createElement("li"),when=document.createElement("time");when.dateTime=e[0];
-  const dow=dateObj(e[0]).getUTCDay();
+  const li=document.createElement("li"),when=document.createElement("time");when.dateTime=eventDate;
+  const dow=dateObj(eventDate).getUTCDay();
   if(dow===0||dow===6)when.className="weekend";
-  const first=e[0]!==previousDate;
-  when.textContent=first?dateLabel(e,lang):"";
+  const first=eventDate!==previousDate;
+  when.textContent=first?dateLabel(eventDate,lang,e[8]===true):"";
   if(!first)when.setAttribute("aria-label",en?"Same date as above":"Та же дата, что выше");
-  previousDate=e[0];
+  previousDate=eventDate;
   const details=document.createElement("div"),title=document.createElement("strong");
   title.textContent=en?e[3]:e[2];details.append(title);
   if(e[6]||e[7]){
