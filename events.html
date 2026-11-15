@@ -40,7 +40,7 @@ let midnightTimer;
 function dateObj(s){return new Date(s+"T12:00:00Z")}
 function textDate(d,lang,options){return dateObj(d).toLocaleDateString(lang==="en"?"en-GB":"ru-RU",{...options,timeZone:"UTC"})}
 function dateLabel(e,lang){
- const start=e[0],end=e[1],uncertain=e[9];
+ const start=e[0],end=e[1],uncertain=e[8]===true;
  if(uncertain)return lang==="en"?"27 or 28 Mar":"27 или 28 мар";
  const startLabel=textDate(start,lang,{day:"numeric",weekday:"short"});
  if(!end)return startLabel;
@@ -91,8 +91,8 @@ function render(lang){
   previousDate=e[0];
   const details=document.createElement("div"),title=document.createElement("strong");
   title.textContent=en?e[3]:e[2];details.append(title);
-  if(e[7]||e[8]){
-   const note=document.createElement("small");note.textContent=(en?e[8]:e[7])||"";details.append(note);
+  if(e[6]||e[7]){
+   const note=document.createElement("small");note.textContent=(en?e[7]:e[6])||"";details.append(note);
   }
   li.append(when,thumbnail(e),details);list.append(li);
  }
