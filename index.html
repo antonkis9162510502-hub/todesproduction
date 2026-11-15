@@ -328,6 +328,47 @@
       shine.setAttribute('aria-hidden','true');
       shine.alt = '';
       logo.insertAdjacentElement('afterend', shine);
+
+      // iOS Chrome and Safari can fail to interpolate animated polygon clip-path.
+      // Keep the existing CSS animation on Android/desktop, and drive the
+      // same moving metallic highlight explicitly on iOS.
+      const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      if (!isIOS) return;
+
+      shine.style.animation = 'none';
+      shine.style.webkitAnimation = 'none';
+      // The owner requested this branded animation even when the iPhone
+      // reports reduced motion; this overrides only the logo's hidden state.
+      shine.style.display = 'block';
+      shine.style.opacity = '0';
+      const duration = 5200;
+      const started = performance.now();
+      let lastPaint = -Infinity;
+
+      function drawMetalHighlight(time) {
+        if (time - lastPaint >= 33) {
+          lastPaint = time;
+          const progress = ((time - started) % duration) / duration;
+          if (progress < 0.10 || progress > 0.52) {
+            shine.style.opacity = '0';
+          } else {
+            const travel = (progress - 0.10) / 0.42;
+            const left = -30 + 142 * travel;
+            const polygon = 'polygon(' +
+              left.toFixed(2) + '% 0%,' +
+              (left + 16).toFixed(2) + '% 0%,' +
+              (left + 36).toFixed(2) + '% 100%,' +
+              (left + 20).toFixed(2) + '% 100%)';
+            shine.style.webkitClipPath = polygon;
+            shine.style.clipPath = polygon;
+            shine.style.opacity = String(Math.max(0, Math.min(1,
+              (progress - 0.10) / 0.035, (0.52 - progress) / 0.035)));
+          }
+        }
+        requestAnimationFrame(drawMetalHighlight);
+      }
+      requestAnimationFrame(drawMetalHighlight);
     })();
   </script>
 </body>
