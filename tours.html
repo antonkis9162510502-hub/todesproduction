@@ -53,6 +53,10 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 .poster-stageglow{animation:poster-light-breathe 12s ease-in-out infinite}
 }
 
+/* Повтор первого гастрольного баннера перед расписанием января 2027. */
+.month-poster{margin:6px 0 34px}
+@media(max-width:700px){.month-poster{margin:4px 0 24px}}
+
 /* Волшебная планета — утверждённый баннер TODES, без дополнительных надписей. */
 .magic-planet-banner{display:block;position:relative;overflow:hidden;margin:22px 0 26px;border:0;border-radius:17px;background:#090b0e;text-decoration:none;transition:filter .25s ease}
 .magic-planet-banner:hover{filter:brightness(1.06)}
@@ -121,6 +125,18 @@ function setLang(lang){
  target.replaceChildren();
  for(const month of months){
   const section=document.createElement('section');section.className='month';
+  // Repeat the opening tour poster immediately before the January 2027 heading.
+  // Clone the DOM image so the large embedded image is not duplicated in HTML.
+  if(month==='2027-01'){
+    const original=document.querySelector('.intro .poster');
+    if(original){
+      const copied=original.cloneNode(true);
+      copied.classList.add('month-poster','is-paused');
+      const picture=copied.querySelector('.poster-img');
+      if(picture){picture.loading='lazy';picture.removeAttribute('fetchpriority')}
+      section.append(copied);
+    }
+  }
   const head=document.createElement('div');head.className='month-head';
   const h=document.createElement('h2');h.textContent=t.month[month]||month;
   head.append(h);section.append(head);
