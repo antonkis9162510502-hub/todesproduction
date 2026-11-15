@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Театр — TODESPRODUCTION</title><style>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>План мероприятий — TODESPRODUCTION</title><style>
 
 :root{color-scheme:dark;--bg:#090b0e;--text:#f1f1ee;--muted:#a4a9ae;--line:#2a2e33;--metal:#bcc5cd}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -11,7 +11,7 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 .intro{padding:80px 0 52px}.kicker{margin:0 0 19px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}.intro h1{font-size:clamp(39px,6vw,70px);line-height:1.07;font-weight:600;letter-spacing:-.055em;margin:0 0 22px}.lead{font-size:14px;line-height:1.75;color:#9fa9b1;max-width:660px;margin:0}
 
 section.month{margin:0 0 42px}h2{font-size:20px;text-transform:capitalize}ul{padding:0;list-style:none}li{display:grid;grid-template-columns:6em minmax(55px,92px) 1fr;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}time,small{color:var(--muted);font-size:14px}li img{width:100%;aspect-ratio:14/9;object-fit:cover;border-radius:5px;background:#21262c}li strong{font-size:clamp(16px,2vw,23px)}li small{display:block;margin-top:4px}@media(max-width:540px){.wrap{width:calc(100% - 32px)}li{grid-template-columns:4em 60px 1fr;gap:10px}.intro{padding:40px 0 12px}}
-</style></head><body><div class="wrap"><header><a class="back" id="home" href="index.html">← На главную</a><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>Театр</h1></section><div id="schedule"></div></main></div><script>
+</style></head><body><div class="wrap"><header><a class="back" id="home" href="index.html">← На главную</a><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>План мероприятий</h1></section><div id="schedule"></div></main></div><script>
 const shows = [
   [
     "#Продолжение",
@@ -323,7 +323,7 @@ const performances = [
 function render(lang) {
   const en = lang === 'en';
   document.documentElement.lang = lang;
-  const title = en ? 'Theatre' : 'Театр';
+  const title = en ? 'Event schedule' : 'План мероприятий';
   document.querySelector('h1').textContent = title;
   document.title = title + ' — TODESPRODUCTION';
   const home = document.querySelector('#home');
