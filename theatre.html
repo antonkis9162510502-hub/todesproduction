@@ -11,7 +11,7 @@ header{height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;al
 .intro{padding:80px 0 52px}.kicker{margin:0 0 19px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}.intro h1{font-size:clamp(39px,6vw,70px);line-height:1.07;font-weight:600;letter-spacing:-.055em;margin:0 0 22px}.lead{font-size:14px;line-height:1.75;color:#9fa9b1;max-width:660px;margin:0}
 
 section.month{margin:0 0 42px}section.month h2{font-size:clamp(28px,5vw,38px);font-weight:750;line-height:1.15;letter-spacing:-.025em;text-transform:capitalize;margin:0 0 20px}ul{padding:0;list-style:none}li{display:grid;grid-template-columns:6em minmax(55px,92px) 1fr;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}time{color:#d7dde3;font-size:18px;font-weight:750;line-height:1.2;letter-spacing:.01em}time.weekend{color:#f16a70}small{color:var(--muted);font-size:14px}li img{width:100%;height:auto;display:block;aspect-ratio:14/9;object-fit:cover;border-radius:5px;background:#21262c}li strong{font-size:clamp(16px,2vw,23px)}li small{display:block;margin-top:4px}@media(max-width:540px){.wrap{width:calc(100% - 32px)}li{grid-template-columns:4em 60px 1fr;gap:10px}.intro{padding:40px 0 12px}}
-</style></head><body><div class="wrap"><header><a class="back" id="home" href="index.html">← На главную</a><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>План мероприятий</h1></section><div id="schedule"></div></main></div><script>
+</style></head><body><div class="wrap"><header><a class="back" id="home" href="index.html">← На главную</a><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>План мероприятий</h1><a class="back" id="lightplot" href="teatrlightplot2027.pdf" target="_blank" rel="noopener">Световой план 2027 · PDF ↗</a></section><div id="schedule"></div></main></div><script>
 const shows = [
   [
     "#Продолжение",
@@ -496,6 +496,7 @@ function render(lang) {
   const title = en ? 'Event schedule' : 'План мероприятий';
   document.querySelector('h1').textContent = title;
   document.title = title + ' — TODESPRODUCTION';
+  document.querySelector('#lightplot').textContent = en ? 'Lighting plot 2027 · PDF ↗' : 'Световой план 2027 · PDF ↗';
   const home = document.querySelector('#home');
   home.href = 'index.html?lang=' + lang;
   home.textContent = en ? '← Home' : '← На главную';
