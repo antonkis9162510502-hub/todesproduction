@@ -498,6 +498,7 @@ function render(lang) {
   document.title = title + ' — TODESPRODUCTION';
   document.querySelector('#lightplot').textContent = en ? 'Lighting' : 'Свет';
   document.querySelector('#video').textContent = en ? 'Video' : 'Видео';
+  document.querySelector('#video').href = 'video.html?lang=' + lang;
   const home = document.querySelector('#home');
   home.href = 'index.html?lang=' + lang;
   home.textContent = en ? '← Home' : '← На главную';
