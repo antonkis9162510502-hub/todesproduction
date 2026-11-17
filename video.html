@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0e">
+<meta name="description" content="Технические требования к видеоматериалам и конфигурации экранов театра TODES.">
+<title>Видео — театр TODES | TODESPRODUCTION</title>
+<style>
+:root{color-scheme:dark;--bg:#090b0e;--text:#f1f1ee;--muted:#a4a9ae;--line:#2a2e33;--metal:#bcc5cd}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(114,135,158,.11),transparent 48%)}
+a{color:inherit;text-decoration:none}.wrap{width:min(1010px,calc(100% - 44px));margin:auto;position:relative}
+header{min-height:91px;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.back{font-size:11px;letter-spacing:.11em;color:#e7ebef;text-transform:uppercase;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 20px;border:1px solid #59646e;border-radius:999px;background:linear-gradient(145deg,rgba(158,172,185,.2),rgba(31,38,45,.58));box-shadow:inset 0 1px 0 rgba(255,255,255,.13)}
+.back:hover{border-color:#aebbc6;background:#232c34}.header-links{display:flex;align-items:center;gap:10px}
+.intro{padding:73px 0 40px}.kicker{margin:0 0 19px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}
+h1{font-size:clamp(42px,6vw,70px);line-height:1.07;font-weight:600;letter-spacing:-.055em;margin:0 0 20px}
+.lead{font-size:15px;line-height:1.8;color:#aab2b9;max-width:700px;margin:0}
+h2{font-size:clamp(24px,3vw,33px);font-weight:650;letter-spacing:-.03em;margin:0 0 20px}
+section{margin-bottom:58px}.requirements{border:1px solid #333b42;border-radius:13px;padding:24px 26px;background:linear-gradient(145deg,#141a20,#0e1216)}
+.requirements p{margin:0 0 12px;color:#c4ccd2}.requirements p:last-child{margin-bottom:0}
+.requirements strong{color:#f1f3f5}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.screen{border:1px solid #343b42;background:#11161b;padding:23px 22px;border-radius:12px;min-height:188px}
+.screen-name{font-size:13px;font-weight:750;letter-spacing:.04em;color:#d1dbe4;overflow-wrap:anywhere;margin-bottom:15px}
+.resolution{font-size:clamp(25px,3vw,33px);line-height:1.2;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
+.unit{color:#a8b0b7;font-size:12px;margin-left:7px}
+.physical{margin-top:11px;color:#a9b3bc;font-size:13px}
+.note{color:#aab3ba;font-size:13px;line-height:1.75;margin:20px 0 0}
+.files-note{padding:20px 24px;border-left:2px solid #8294a5;background:#12181e;border-radius:0 10px 10px 0}
+.footer{border-top:1px solid var(--line);margin-top:70px;padding:23px 0 35px;color:#757e85;font-size:11px;text-align:center;letter-spacing:.1em}
+@media(max-width:640px){.wrap{width:calc(100% - 32px)}header{min-height:75px}.back{padding:10px 12px;font-size:10px}.intro{padding:42px 0 32px}.grid{grid-template-columns:1fr}.screen{min-height:0}.requirements{padding:20px}.resolution{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><nav class="header-links"><a href="theatre.html" class="back">← Театр</a><a href="index.html" class="back">На главную</a></nav></header>
+<main>
+<section class="intro"><p class="kicker">TODESPRODUCTION / ТЕАТР</p><h1>Видео</h1><p class="lead">Технические требования к подготовке видеоконтента для экранов театра TODES. Параметры приведены по техническому заданию 2026 года.</p></section>
+<section><h2>Форматы видеоматериалов</h2><div class="requirements">
+<p><strong>Видеофайлы:</strong> QuickTime (.mov), кодек DXV-3 Normal Quality, без альфа-канала (No Alpha) либо с альфа-каналом (With Alpha).</p>
+<p><strong>Частота кадров:</strong> 25 fps, без полей, квадратный пиксель.</p>
+<p><strong>Статичные изображения:</strong> JPG или PNG, цветовое пространство RGB.</p>
+<p><strong>Звук:</strong> при наличии должен быть встроен в файл; PCM Uncompressed, 48 кГц, 16 бит, Stereo.</p>
+<p><strong>Кодек:</strong> <a href="https://resolume.com/download/" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">Resolume DXV-3 — загрузка</a>.</p>
+</div></section>
+<section><h2>Разрешения экранов</h2><div class="grid">
+<article class="screen"><div class="screen-name">Screen_3</div><div class="resolution">3968 × 1792<span class="unit">px</span></div><div class="physical">Физический размер: 12 × 5,5 м</div></article>
+<article class="screen"><div class="screen-name">Screen_1+2+4+5</div><div class="resolution">2048 × 1280<span class="unit">px</span></div><div class="physical">Четыре боковых экрана в одном файле. Каждый: 2 × 5 м. Общий размер: 8 × 5 м</div></article>
+<article class="screen"><div class="screen-name">Screen_Arlekin+_Portal</div><div class="resolution">6528 × 1920<span class="unit">px</span></div><div class="physical">Arlekin: 12 × 1 м; Portal: 2,5 × 4 м; Portal_L + Portal_R: 5 × 4 м</div></article>
+<article class="screen"><div class="screen-name">Screen_Floor</div><div class="resolution">4352 × 2304<span class="unit">px</span></div><div class="physical">Напольный экран: 17 × 9 м</div></article>
+</div><p class="note">Файлы сеток экрана в масштабе 1:1 входят в исходный пакет технического задания. Размеры выше не заменяют оригинальные PNG-шаблоны для компоновки видеоконтента.</p></section>
+<section><h2>Тестовые файлы</h2><div class="files-note"><p style="margin:0 0 10px">Тестовый видеоматериал — длительностью 5–10 секунд.</p><p style="margin:0">Адрес для отправки тестовых файлов и контакт технического специалиста указаны в исходном техническом задании.</p></div></section>
+</main>
+<footer class="footer">TODESPRODUCTION · ТЕХНИЧЕСКИЕ МАТЕРИАЛЫ</footer>
+</div>
+</body>
+</html>
