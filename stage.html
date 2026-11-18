@@ -38,6 +38,13 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 .lightbox p{position:absolute;bottom:9px;color:#d2d6dc;font-size:12px;margin:0;max-width:90%;text-align:center}
 @media(max-width:760px){header{min-height:auto}.brand{font-size:12px}.intro{padding:30px 0 21px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.access{gap:11px}.photo{border-radius:11px}.photo figcaption{font-size:11px;line-height:1.35;padding:10px 11px}.gallery .photo:first-child{grid-column:1/-1}.gallery .photo img{aspect-ratio:1.15}.gallery .photo:first-child img{aspect-ratio:1.65}.access .photo img{aspect-ratio:.8}.section-heading{margin:27px 0 12px}.pill{padding:11px 14px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.photo img{transition:none}}
+
+.plan-section{margin:36px 0 32px}
+.plan-preview{margin:0;overflow:hidden;background:#0c1117;border:1px solid #34424c;border-radius:16px}
+.plan-preview a{display:block}
+.plan-preview img{display:block;width:100%;height:auto;transition:filter .22s ease}
+.plan-preview a:hover img{filter:brightness(1.15)}
+.plan-preview figcaption{padding:11px 17px 14px;color:#bdc7d1;font-size:12px}
 </style>
 </head>
 <body>
@@ -46,6 +53,8 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 <main>
 <section class="intro"><p class="eyebrow">Театр TODES / Техническая информация</p><h1>Сцена</h1><p class="lead">Фотографии сценического пространства, зрительного зала и проходов на сцену. Нажми на фотографию для увеличения.</p></section>
 <figure class="photo hero"><button type="button" data-src="stage/stage-front.webp" data-caption="Общий вид сцены из зрительного зала" aria-label="Увеличить: общий вид сцены"><img src="stage/stage-front.webp" alt="Общий вид сцены из зрительного зала" fetchpriority="high" decoding="async"></button><figcaption>Общий вид сцены из зрительного зала</figcaption></figure>
+
+<section class="plan-section" aria-label="План сцены"><h2 class="section-heading">Stage Plan — план сцены</h2><figure class="plan-preview"><a href="stage/stage-plan.svg" target="_blank" rel="noopener" title="Открыть план в полном размере"><img src="stage/stage-plan.svg" alt="План сцены TODES: семь экранов, четыре лестницы и размеры по схеме" loading="lazy" decoding="async"></a><figcaption>Вид сверху · размеры в метрах · схема не в масштабе. Нажми для увеличения.</figcaption></figure></section>
 <h2 class="section-heading">Сценическое пространство</h2>
 <section class="gallery" aria-label="Фотографии сценического пространства">
 <figure class="photo"><button type="button" data-src="stage/stage-angle-left.webp" data-caption="Вид сцены слева" aria-label="Увеличить фото сцены слева"><img src="stage/stage-angle-left.webp" alt="Сцена со стороны левого сектора зрительного зала" loading="lazy" decoding="async"></button><figcaption>Сцена — вид слева</figcaption></figure>
@@ -54,8 +63,8 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 </section>
 <h2 class="section-heading">Проходы на сцену</h2>
 <section class="access" aria-label="Проходы и лестницы">
-<figure class="photo"><button type="button" data-src="stage/stage-access-1.webp" data-caption="Левый подъём на сцену" aria-label="Увеличить фото левого подъёма на сцену"><img src="stage/stage-access-1.webp" alt="Левый подъём на сцену, ступени с зелёной маркировкой" loading="lazy" decoding="async"></button><figcaption>Левый подъём на сцену</figcaption></figure>
-<figure class="photo"><button type="button" data-src="stage/stage-access-2.webp" data-caption="Правый подъём на сцену" aria-label="Увеличить фото правого подъёма на сцену"><img src="stage/stage-access-2.webp" alt="Правый подъём на сцену, лестница" loading="lazy" decoding="async"></button><figcaption>Правый подъём на сцену</figcaption></figure>
+<figure class="photo"><button type="button" data-src="stage/stage-access-1.webp?v=20261118-clean" data-caption="Левый подъём на сцену" aria-label="Увеличить фото левого подъёма на сцену"><img src="stage/stage-access-1.webp?v=20261118-clean" alt="Левый подъём на сцену, ступени с зелёной маркировкой" loading="lazy" decoding="async"></button><figcaption>Левый подъём на сцену</figcaption></figure>
+<figure class="photo"><button type="button" data-src="stage/stage-access-2.webp?v=20261118-clean" data-caption="Правый подъём на сцену" aria-label="Увеличить фото правого подъёма на сцену"><img src="stage/stage-access-2.webp?v=20261118-clean" alt="Правый подъём на сцену, лестница" loading="lazy" decoding="async"></button><figcaption>Правый подъём на сцену</figcaption></figure>
 </section>
 </main>
 <footer>© TODESPRODUCTION 2026</footer>

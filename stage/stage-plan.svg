@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="810" viewBox="0 0 1180 810" role="img" aria-label="Stage Plan театра TODES. Вид сверху, семь экранов, четыре лестницы, размеры по предоставленной схеме">
+<defs>
+ <pattern id="grid" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M22 0H0V22" fill="none" stroke="#202931" stroke-width="0.65"/></pattern>
+ <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5.5" markerHeight="5.5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10" stroke="#bac7d2" stroke-width="1.1" fill="none"/></marker>
+ <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.4"/></filter>
+</defs>
+<style>
+ .txt{font-family:Arial,Helvetica,sans-serif;fill:#ecf1f5}
+ .small{font-size:12px;font-family:Arial,Helvetica,sans-serif;fill:#aebfca}
+ .dim{stroke:#b6c3ce;stroke-width:1.1;fill:none;marker-start:url(#arrow);marker-end:url(#arrow)}
+ .dval{font-size:14px;font-family:Arial,Helvetica,sans-serif;font-weight:700;fill:#eef4fa;}
+ .screen{stroke:#2853ff;stroke-width:6;stroke-linecap:square}
+ .stair{stroke:#aab5bf;stroke-width:1.6;fill:#0a1016}
+ .step{stroke:#71818c;stroke-width:1.1}
+</style>
+<rect width="1180" height="810" rx="20" fill="#0c1117"/>
+<rect x="18" y="18" width="1144" height="774" rx="16" fill="url(#grid)" stroke="#303c48" stroke-width="1.2"/>
+<text x="54" y="67" class="txt" font-size="30" font-weight="700" letter-spacing="2">TODES / STAGE PLAN</text>
+<text x="54" y="90" class="small">Театр TODES · вид сверху · экраны и проходы · размеры в метрах</text>
+<text x="1032" y="72" class="small" text-anchor="end">НЕ В МАСШТАБЕ</text>
+<text x="590" y="126" class="txt" font-size="18" font-weight="650" text-anchor="middle" letter-spacing="1.5">BACKSTAGE</text>
+
+<path d="M147 164H1034 M192 193H990 M192 193V602 H990 V193" stroke="#a0adb7" stroke-width="2" fill="none"/>
+<rect x="192" y="193" width="798" height="409" fill="#151f28" fill-opacity="0.62"/>
+<line x1="329" y1="196" x2="866" y2="196" class="screen"/>
+<line x1="294" y1="360" x2="378" y2="333" class="screen"/>
+<line x1="812" y1="333" x2="896" y2="360" class="screen"/>
+<line x1="254" y1="465" x2="341" y2="437" class="screen"/>
+<line x1="851" y1="437" x2="939" y2="465" class="screen"/>
+<line x1="194" y1="568" x2="306" y2="568" class="screen"/>
+<line x1="876" y1="568" x2="988" y2="568" class="screen"/>
+<rect x="208" y="165" width="94" height="85" class="stair"/>
+<line x1="208" y1="179.2" x2="302" y2="179.2" class="step"/>
+<line x1="208" y1="193.3" x2="302" y2="193.3" class="step"/>
+<line x1="208" y1="207.5" x2="302" y2="207.5" class="step"/>
+<line x1="208" y1="221.7" x2="302" y2="221.7" class="step"/>
+<line x1="208" y1="235.8" x2="302" y2="235.8" class="step"/>
+<rect x="899" y="165" width="94" height="85" class="stair"/>
+<line x1="899" y1="179.2" x2="993" y2="179.2" class="step"/>
+<line x1="899" y1="193.3" x2="993" y2="193.3" class="step"/>
+<line x1="899" y1="207.5" x2="993" y2="207.5" class="step"/>
+<line x1="899" y1="221.7" x2="993" y2="221.7" class="step"/>
+<line x1="899" y1="235.8" x2="993" y2="235.8" class="step"/>
+<rect x="192" y="602" width="40" height="60" class="stair"/>
+<line x1="192" y1="617.0" x2="232" y2="617.0" class="step"/>
+<line x1="192" y1="632.0" x2="232" y2="632.0" class="step"/>
+<line x1="192" y1="647.0" x2="232" y2="647.0" class="step"/>
+<rect x="950" y="602" width="40" height="60" class="stair"/>
+<line x1="950" y1="617.0" x2="990" y2="617.0" class="step"/>
+<line x1="950" y1="632.0" x2="990" y2="632.0" class="step"/>
+<line x1="950" y1="647.0" x2="990" y2="647.0" class="step"/>
+<line x1="382" y1="348" x2="808" y2="348" class="dim"/>
+<text x="595.0" y="338" class="dval" text-anchor="middle">10 м</text>
+<line x1="345" y1="453" x2="847" y2="453" class="dim"/>
+<text x="596.0" y="443" class="dval" text-anchor="middle">11 м</text>
+<line x1="310" y1="568" x2="872" y2="568" class="dim"/>
+<text x="591.0" y="558" class="dval" text-anchor="middle">12 м</text>
+<line x1="630" y1="200" x2="630" y2="599" class="dim"/>
+<text x="617" y="407" class="dval" text-anchor="middle" transform="rotate(-90 617 407)">9 м</text>
+<line x1="302" y1="250" x2="294" y2="355" class="dim"/>
+<text x="270" y="310" class="dval" text-anchor="middle" transform="rotate(-65 270 310)">2 м</text>
+<line x1="899" y1="270" x2="993" y2="270" class="dim"/>
+<text x="946" y="260" class="dval" text-anchor="middle" transform="rotate(0 946 260)">1,5 м</text>
+<line x1="272" y1="370" x2="272" y2="453" class="dim"/>
+<text x="262" y="413" class="dval" text-anchor="middle" transform="rotate(-90 262 413)">1,8 м</text>
+<line x1="924" y1="370" x2="924" y2="443" class="dim"/>
+<text x="943" y="405" class="dval" text-anchor="middle" transform="rotate(-80 943 405)">1,5 м</text>
+<line x1="235" y1="470" x2="235" y2="563" class="dim"/>
+<text x="222" y="521" class="dval" text-anchor="middle" transform="rotate(-90 222 521)">1,3 м</text>
+<line x1="307" y1="467" x2="307" y2="564" class="dim"/>
+<text x="298" y="518" class="dval" text-anchor="middle" transform="rotate(-90 298 518)">2,7 м</text>
+<line x1="946" y1="467" x2="946" y2="559" class="dim"/>
+<text x="965" y="510" class="dval" text-anchor="middle" transform="rotate(-78 965 510)">2 м</text>
+<line x1="278" y1="570" x2="278" y2="600" class="dim"/>
+<text x="264" y="590" class="dval" text-anchor="middle" transform="rotate(-90 264 590)">1,1 м</text>
+<text x="590" y="713" class="txt" font-size="20" text-anchor="middle" letter-spacing="1.2">ЗРИТЕЛЬНЫЙ ЗАЛ</text>
+<line x1="490" y1="743" x2="550" y2="743" class="screen"/>
+<text x="564" y="748" class="small" font-size="13">— Экраны</text>
+<text x="1040" y="743" class="small" text-anchor="end">Геометрия по эскизу пользователя · TODESPRODUCTION</text>
+</svg>
