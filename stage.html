@@ -62,7 +62,10 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 .feedback-dialog .field textarea{resize:vertical;min-height:120px;line-height:1.5}
 .feedback-dialog .send-btn{width:100%;margin-top:8px;min-height:49px;border:0;border-radius:3px;background:#e9e7e2;color:#0b0d0e;font-weight:650;font-size:13px;cursor:pointer}
 .feedback-note{margin:15px 0 10px;font-size:11px;color:#aeb6bf;line-height:1.6}
-.feedback-email{font-size:12px;color:#e6edf4;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.feedback-dialog .send-btn:disabled{opacity:.6;cursor:wait}
+.feedback-status{color:#cbd6e0;line-height:1.55;font-size:13px;margin:12px 0 0}
+.feedback-status:empty{display:none}
+.feedback-dialog .bot-field{position:absolute!important;width:1px;height:1px;opacity:0;left:-9999px;overflow:hidden;pointer-events:none}
 @media(max-width:440px){.feedback-inner{padding:23px}}
 </style>
 </head>
@@ -94,14 +97,18 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
     <p class="feedback-kicker">TODESPRODUCTION / STAGE</p>
     <h2 id="stage-feedback-title">Обратная связь</h2>
     <p class="feedback-lead">Есть вопросы по сцене театра TODES? Напиши техническому специалисту.</p>
-    <form id="stage-feedback-form">
+    <form name="stage-feedback" id="stage-feedback-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="stage-feedback">
+      <input type="hidden" name="subject" value="TODESPRODUCTION — вопросы по сцене">
+      <input type="hidden" name="department" value="stage">
+      <p class="bot-field" aria-hidden="true"><label>Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" maxlength="120" required></label>
       <label class="field"><span>Электронная почта</span><input name="email" type="email" autocomplete="email" maxlength="254" required></label>
       <label class="field"><span>Сообщение</span><textarea name="message" maxlength="2500" required></textarea></label>
-      <button type="submit" class="send-btn">Подготовить письмо</button>
+      <button type="submit" class="send-btn">Отправить сообщение</button>
+      <p class="feedback-status" id="stage-feedback-status" role="status" aria-live="polite"></p>
     </form>
-    <p class="feedback-note">Откроется почтовое приложение. Чтобы отправить сообщение, подтверди отправку в нём.</p>
-    <a class="feedback-email" href="mailto:kondratiuk@todes.ru">kondratiuk@todes.ru</a>
+    <p class="feedback-note">Мы ответим на указанный адрес электронной почты.</p>
   </div>
 </dialog>
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Просмотр фотографии" aria-modal="true"><button class="close" id="close" type="button" aria-label="Закрыть просмотр">✕ Закрыть</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div>
@@ -115,19 +122,27 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
   const open=document.getElementById("stage-feedback-open");
   const close=document.getElementById("stage-feedback-close");
   const form=document.getElementById("stage-feedback-form");
-  open.addEventListener("click",()=>{if(!modal.open) modal.showModal();form.elements.name.focus()});
+  const status=document.getElementById("stage-feedback-status");
+  const submit=form.querySelector('[type="submit"]');
+  open.addEventListener("click",()=>{status.textContent="";if(!modal.open)modal.showModal();form.elements.name.focus()});
   close.addEventListener("click",()=>modal.close());
   modal.addEventListener("click",event=>{if(event.target===modal)modal.close()});
-  form.addEventListener("submit",event=>{
+  form.addEventListener("submit",async event=>{
     event.preventDefault();
-    if(!form.reportValidity())return;
-    const name=form.elements.name.value.trim();
-    const email=form.elements.email.value.trim();
-    const message=form.elements.message.value.trim();
-    const subject="TODESPRODUCTION — Вопрос по сцене театра TODES";
-    const body="Имя: "+name+"\nЭлектронная почта: "+email+"\n\n"+message;
-    const uri="mailto:kondratiuk@todes.ru?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
-    window.location.href=uri;
+    if(!form.reportValidity()||submit.disabled)return;
+    status.textContent="Отправляем…";submit.disabled=true;
+    try {
+      const response=await fetch("/",{
+        method:"POST",
+        headers:{"Content-Type":"application/x-www-form-urlencoded"},
+        body:new URLSearchParams(new FormData(form)).toString()
+      });
+      if(!response.ok)throw Error("HTTP "+response.status);
+      status.textContent="Спасибо! Сообщение принято.";
+      form.reset();
+    }catch(error){
+      status.textContent="Не удалось отправить сообщение. Попробуй ещё раз чуть позже.";
+    }finally{submit.disabled=false}
   });
 })();
 </script>

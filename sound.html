@@ -115,7 +115,7 @@ h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin
       <button type="submit" class="send-btn" data-ru="Отправить сообщение" data-en="Send message">Отправить сообщение</button>
       <p class="contact-status" id="sound-feedback-status" role="status" aria-live="polite"></p>
     </form>
-    <p class="contact-note"><span data-ru="Связь со звуковой службой:" data-en="Sound department contact:">Связь со звуковой службой:</span> <a href="mailto:skugarev@todes.ru">skugarev@todes.ru</a></p>
+    <p class="contact-note" data-ru="Мы ответим на указанный адрес электронной почты." data-en="We will reply to the email address you provide.">Мы ответим на указанный адрес электронной почты.</p>
   </div>
 </dialog>
 <script>
@@ -131,8 +131,8 @@ const form=document.getElementById("sound-feedback-form");
 const status=document.getElementById("sound-feedback-status");
 const submit=form.querySelector('[type="submit"]');
 const messages={
-  ru:{sending:"Отправляем…",sent:"Спасибо! Сообщение принято.",error:"Не удалось отправить сообщение. Напиши напрямую на skugarev@todes.ru."},
-  en:{sending:"Sending…",sent:"Thank you! Your message was submitted.",error:"Unable to submit. Please email skugarev@todes.ru directly."}
+  ru:{sending:"Отправляем…",sent:"Спасибо! Сообщение принято.",error:"Не удалось отправить сообщение. Попробуй ещё раз чуть позже."},
+  en:{sending:"Sending…",sent:"Thank you! Your message was submitted.",error:"Unable to submit. Please try again later."}
 };
 const words=()=>messages[document.documentElement.lang]||messages.ru;
 document.getElementById("feedback-open").addEventListener("click",()=>{
