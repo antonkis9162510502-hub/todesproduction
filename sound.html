@@ -12,7 +12,30 @@
 body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% -10%,rgba(115,137,161,.14),transparent 55%)}
 a{color:inherit;text-decoration:none}.wrap{width:min(1090px,calc(100% - 36px));margin:auto;position:relative}.top{padding:22px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;border-bottom:1px solid #282d33}
 .topnav{display:flex;gap:9px;flex-wrap:wrap}.pill{display:inline-flex;align-items:center;justify-content:center;min-height:39px;border:1px solid #414954;border-radius:999px;padding:8px 17px;color:#c4cdd4;background:transparent;font-size:12px;letter-spacing:.05em;transition:.2s}
-.pill:hover,.pill:focus-visible{border-color:#d7dce1;color:white}.pill.current{background:#e6e8eb;color:#111820;border-color:#e6e8eb}
+.pill:hover,.pill:focus-visible{border-color:#d7dce1;color:white}
+button.pill{font-size:12px;letter-spacing:.05em;cursor:pointer}
+.contact-dialog{position:fixed;width:min(510px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;margin:auto;padding:0;border:1px solid #444b54;border-radius:9px;background:#14181d;color:#f1f1ee;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+.contact-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+.contact-dialog-inner{position:relative;padding:clamp(23px,5vw,40px)}
+.contact-dialog-kicker{margin:0 45px 12px 0;color:#aab6c0;letter-spacing:.17em;font-size:11px;font-weight:700}
+.contact-dialog h2{margin:0 35px 9px 0;font-size:clamp(28px,6vw,38px);line-height:1.12;letter-spacing:-.02em}
+.contact-dialog-lead{margin:0 0 20px;font-size:13px;line-height:1.65;color:#aab0b6}
+.contact-close{position:absolute;right:19px;top:18px;display:grid;place-items:center;width:36px;height:36px;background:transparent;color:#d3d7dc;border:1px solid #424a52;border-radius:50%;font-size:26px;line-height:1;cursor:pointer}
+.contact-close:hover{background:#28313a}
+.contact-dialog .field{display:block;margin:14px 0}
+.contact-dialog .field span{display:block;font-size:12px;margin:0 0 9px;color:#c7c9ca}
+.contact-dialog .field input,.contact-dialog .field textarea{width:100%;background:#0b0e11;color:#f4f4f4;border:1px solid #454c53;border-radius:3px;outline:0;padding:14px;font-size:14px;font-family:inherit}
+.contact-dialog .field input:focus,.contact-dialog .field textarea:focus{border-color:#b5a185}
+.contact-dialog .field textarea{resize:vertical;min-height:115px;line-height:1.5}
+.contact-dialog .send-btn{width:100%;margin-top:8px;min-height:49px;border:0;border-radius:3px;background:#e9e7e2;color:#0b0d0e;font-weight:650;font-size:13px;cursor:pointer}
+.contact-dialog .send-btn:disabled{opacity:.6;cursor:wait}
+.contact-dialog .contact-status{color:#cbd6e0;line-height:1.55;font-size:13px;margin:12px 0 0}
+.contact-dialog .contact-status:empty{display:none}
+.contact-dialog .contact-note{margin:15px 0 0;font-size:11px;color:#939aa2;line-height:1.6}
+.contact-dialog .contact-note a{color:#dce6ee;text-decoration:underline;text-underline-offset:3px}
+.contact-dialog .bot-field{position:absolute!important;width:1px;height:1px;opacity:0;left:-9999px;overflow:hidden;pointer-events:none}
+@media(max-width:440px){.contact-dialog-inner{padding:23px}}
+.pill.current{background:#e6e8eb;color:#111820;border-color:#e6e8eb}
 .lang{display:flex;gap:5px}.lang button{font-size:11px;cursor:pointer;color:#b8c4cd;background:transparent;border:1px solid #3e444c;border-radius:999px;padding:8px 11px}.lang button[aria-pressed="true"]{color:#111820;background:#e6e8eb;border-color:#e6e8eb}
 main{padding:62px 0 90px}.kicker{text-transform:uppercase;color:#91a5b5;font-size:11px;letter-spacing:.24em;font-weight:700;margin:0 0 13px}
 h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin:0 0 17px;font-weight:650}
@@ -33,7 +56,7 @@ h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin
 <body>
 <div class="wrap">
 <header class="top">
-<nav class="topnav" aria-label="Навигация"><a class="pill" id="back" href="theatre.html">← Театр</a><a class="pill" id="home" href="index.html">На главную</a><span class="pill current" id="sound-nav">Звук</span></nav>
+<nav class="topnav" aria-label="Навигация"><a class="pill" id="back" href="theatre.html">← Театр</a><a class="pill" id="home" href="index.html">На главную</a><span class="pill current" id="sound-nav">Звук</span><button class="pill" type="button" id="feedback-open">Обратная связь</button></nav>
 <div class="lang" role="group" aria-label="Язык"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
 </header>
 <main>
@@ -75,12 +98,61 @@ h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin
 <p class="note" id="note">Перечень оборудования предоставлен технической службой театра TODES.</p>
 </main><footer class="sitefooter">TODESPRODUCTION © 2026</footer>
 </div>
+<dialog class="contact-dialog" id="sound-feedback-dialog" aria-labelledby="sound-feedback-title">
+  <div class="contact-dialog-inner">
+    <button type="button" class="contact-close" id="feedback-close" aria-label="Закрыть" title="Закрыть">×</button>
+    <p class="contact-dialog-kicker">TODESPRODUCTION / SOUND</p>
+    <h2 id="sound-feedback-title" data-ru="Обратная связь" data-en="Sound feedback">Обратная связь</h2>
+    <p class="contact-dialog-lead" data-ru="Задай вопрос по звуковому оборудованию театра — ответим по электронной почте." data-en="Questions about theatre sound equipment? We'll reply by email.">Задай вопрос по звуковому оборудованию театра — ответим по электронной почте.</p>
+    <form name="sound-feedback" id="sound-feedback-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="sound-feedback">
+      <input type="hidden" name="subject" value="TODESPRODUCTION — вопросы по звуку">
+      <input type="hidden" name="department" value="sound">
+      <p class="bot-field" aria-hidden="true"><label>Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+      <label class="field"><span data-ru="Имя" data-en="Name">Имя</span><input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+      <label class="field"><span data-ru="Электронная почта" data-en="Email address">Электронная почта</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+      <label class="field"><span data-ru="Сообщение" data-en="Message">Сообщение</span><textarea name="message" maxlength="5000" required></textarea></label>
+      <button type="submit" class="send-btn" data-ru="Отправить сообщение" data-en="Send message">Отправить сообщение</button>
+      <p class="contact-status" id="sound-feedback-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="contact-note"><span data-ru="Связь со звуковой службой:" data-en="Sound department contact:">Связь со звуковой службой:</span> <a href="mailto:skugarev@todes.ru">skugarev@todes.ru</a></p>
+  </div>
+</dialog>
 <script>
 (function(){
-const ru={back:"← Театр",home:"На главную",nav:"Звук",kicker:"Техническое оснащение театра",title:"Звук",lead:"Стационарное звуковое оборудование зрительного зала, сцены и фойе театра TODES.",note:"Перечень оборудования предоставлен технической службой театра TODES."};
-const en={back:"← Theatre",home:"Home",nav:"Sound",kicker:"Theatre technical equipment",title:"Sound",lead:"In-house audio equipment for the TODES theatre auditorium, stage and foyer.",note:"Equipment list provided by the TODES theatre technical team."};
-function setLanguage(lang){let dict=lang==="en"?en:ru;document.documentElement.lang=lang;document.title=lang==="en"?"Sound — TODES Theatre":"Звук — Театр TODES";["back","home"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.getElementById("sound-nav").textContent=dict.nav;["kicker","title","lead","note"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.querySelectorAll("[data-ru][data-en]").forEach(el=>{el.textContent=el.getAttribute("data-"+lang)});document.querySelectorAll(".lang button").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang)));document.getElementById("back").href="theatre.html?lang="+lang;document.getElementById("home").href="index.html?lang="+lang;history.replaceState(null,"",location.pathname+"?lang="+lang)}
+const ru={back:"← Театр",home:"На главную",nav:"Звук",feedback:"Обратная связь",kicker:"Техническое оснащение театра",title:"Звук",lead:"Стационарное звуковое оборудование зрительного зала, сцены и фойе театра TODES.",note:"Перечень оборудования предоставлен технической службой театра TODES."};
+const en={back:"← Theatre",home:"Home",nav:"Sound",feedback:"Contact",kicker:"Theatre technical equipment",title:"Sound",lead:"In-house audio equipment for the TODES theatre auditorium, stage and foyer.",note:"Equipment list provided by the TODES theatre technical team."};
+function setLanguage(lang){let dict=lang==="en"?en:ru;document.documentElement.lang=lang;document.title=lang==="en"?"Sound — TODES Theatre":"Звук — Театр TODES";["back","home"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.getElementById("sound-nav").textContent=dict.nav;document.getElementById("feedback-open").textContent=dict.feedback;["kicker","title","lead","note"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.querySelectorAll("[data-ru][data-en]").forEach(el=>{el.textContent=el.getAttribute("data-"+lang)});document.querySelectorAll(".lang button").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang)));document.getElementById("back").href="theatre.html?lang="+lang;document.getElementById("home").href="index.html?lang="+lang;history.replaceState(null,"",location.pathname+"?lang="+lang)}
 document.querySelectorAll(".lang button").forEach(btn=>btn.addEventListener("click",()=>setLanguage(btn.dataset.lang)));setLanguage(new URLSearchParams(location.search).get("lang")==="en"?"en":"ru");
+})();
+(function(){
+const modal=document.getElementById("sound-feedback-dialog");
+const form=document.getElementById("sound-feedback-form");
+const status=document.getElementById("sound-feedback-status");
+const submit=form.querySelector('[type="submit"]');
+const messages={
+  ru:{sending:"Отправляем…",sent:"Спасибо! Сообщение принято.",error:"Не удалось отправить сообщение. Напиши напрямую на skugarev@todes.ru."},
+  en:{sending:"Sending…",sent:"Thank you! Your message was submitted.",error:"Unable to submit. Please email skugarev@todes.ru directly."}
+};
+const words=()=>messages[document.documentElement.lang]||messages.ru;
+document.getElementById("feedback-open").addEventListener("click",()=>{
+ status.textContent="";
+ if(!modal.open)modal.showModal();
+ form.querySelector('[name="name"]').focus();
+});
+document.getElementById("feedback-close").addEventListener("click",()=>modal.close());
+modal.addEventListener("click",e=>{if(e.target===modal)modal.close();});
+form.addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!form.reportValidity()||submit.disabled)return;
+ status.textContent=words().sending;submit.disabled=true;
+ try{
+  const response=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(form)).toString()});
+  if(!response.ok)throw Error("HTTP "+response.status);
+  status.textContent=words().sent;form.reset();
+ }catch(error){status.textContent=words().error;}
+ finally{submit.disabled=false;}
+});
 })();
 </script>
 </body></html>
