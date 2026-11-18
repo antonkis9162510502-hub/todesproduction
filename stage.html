@@ -28,7 +28,7 @@ h1{font-size:clamp(36px,6vw,66px);letter-spacing:.03em;line-height:1.06;margin:0
 .hero img{aspect-ratio:1.74;object-position:center center;height:auto}
 .hero figcaption{padding:16px 20px}
 .section-heading{font-size:19px;letter-spacing:.025em;margin:32px 0 15px;font-weight:640}
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .gallery .photo img{aspect-ratio:1.48}
 .access{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0 0 65px}
 .access .photo img{aspect-ratio:1.3;object-position:center 58%}
@@ -36,7 +36,7 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:99;display:none;align-items:center;justify-content:center;padding:60px 16px 34px}
 .lightbox.open{display:flex}.lightbox img{display:block;max-width:100%;max-height:calc(100dvh - 95px);object-fit:contain}.close{position:absolute;right:18px;top:15px;border:1px solid #6b7680;border-radius:100px;padding:9px 16px;background:#1c242c;color:#fff;font-size:14px}
 .lightbox p{position:absolute;bottom:9px;color:#d2d6dc;font-size:12px;margin:0;max-width:90%;text-align:center}
-@media(max-width:760px){header{min-height:auto}.brand{font-size:12px}.intro{padding:30px 0 21px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.access{gap:11px}.photo{border-radius:11px}.photo figcaption{font-size:11px;line-height:1.35;padding:10px 11px}.gallery .photo:first-child{grid-column:1/-1}.gallery .photo img{aspect-ratio:1.15}.gallery .photo:first-child img{aspect-ratio:1.65}.access .photo img{aspect-ratio:.8}.section-heading{margin:27px 0 12px}.pill{padding:11px 14px;font-size:10px}}
+@media(max-width:760px){header{min-height:auto}.brand{font-size:12px}.intro{padding:30px 0 21px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.access{gap:11px}.photo{border-radius:11px}.photo figcaption{font-size:11px;line-height:1.35;padding:10px 11px}.gallery .photo:first-child{grid-column:auto}.gallery .photo img{aspect-ratio:1.15}.gallery .photo:first-child img{aspect-ratio:1.65}.access .photo img{aspect-ratio:.8}.section-heading{margin:27px 0 12px}.pill{padding:11px 14px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.photo img{transition:none}}
 
 .plan-section{margin:36px 0 32px}
@@ -45,20 +45,39 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 .plan-preview img{display:block;width:100%;height:auto;transition:filter .22s ease}
 .plan-preview a:hover img{filter:brightness(1.15)}
 .plan-preview figcaption{padding:11px 17px 14px;color:#bdc7d1;font-size:12px}
+
+/* Обратная связь на странице сцены */
+.feedback-dialog{position:fixed;width:min(510px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;margin:auto;padding:0;border:1px solid #444b54;border-radius:9px;background:#14181d;color:#f1f1ee;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+.feedback-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+.feedback-inner{position:relative;padding:clamp(23px,5vw,40px)}
+.feedback-kicker{margin:0 42px 12px 0;color:#aab6c0;letter-spacing:.17em;font-size:11px;font-weight:700}
+.feedback-dialog h2{margin:0 35px 9px 0;font-size:clamp(28px,6vw,38px);line-height:1.12}
+.feedback-lead{margin:0 0 18px;font-size:13px;line-height:1.65;color:#aab0b6}
+.feedback-close{position:absolute;right:19px;top:18px;display:grid;place-items:center;width:36px;height:36px;background:transparent;color:#d3d7dc;border:1px solid #424a52;border-radius:50%;font-size:26px;line-height:1;cursor:pointer}
+.feedback-close:hover{background:#28313a}
+.feedback-dialog .field{display:block;margin:14px 0}
+.feedback-dialog .field span{display:block;font-size:12px;margin:0 0 9px;color:#c7c9ca}
+.feedback-dialog .field input,.feedback-dialog .field textarea{width:100%;background:#0b0e11;color:#f4f4f4;border:1px solid #454c53;border-radius:3px;outline:0;padding:14px;font-size:14px;font-family:inherit}
+.feedback-dialog .field input:focus,.feedback-dialog .field textarea:focus{border-color:#b5a185}
+.feedback-dialog .field textarea{resize:vertical;min-height:120px;line-height:1.5}
+.feedback-dialog .send-btn{width:100%;margin-top:8px;min-height:49px;border:0;border-radius:3px;background:#e9e7e2;color:#0b0d0e;font-weight:650;font-size:13px;cursor:pointer}
+.feedback-note{margin:15px 0 10px;font-size:11px;color:#aeb6bf;line-height:1.6}
+.feedback-email{font-size:12px;color:#e6edf4;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+@media(max-width:440px){.feedback-inner{padding:23px}}
 </style>
 </head>
 <body>
 <div class="wrap">
-<header><a class="brand" href="index.html" aria-label="На главную">TODESPRODUCTION</a><nav><a class="pill" href="theatre.html">← Театр</a><a class="pill" href="index.html">На главную</a></nav></header>
+<header><a class="brand" href="index.html" aria-label="На главную">TODESPRODUCTION</a><nav><a class="pill" href="theatre.html">← Театр</a><a class="pill" href="index.html">На главную</a><button type="button" class="pill" id="stage-feedback-open" aria-haspopup="dialog" aria-controls="stage-feedback-dialog">Обратная связь</button></nav></header>
 <main>
 <section class="intro"><p class="eyebrow">Театр TODES / Техническая информация</p><h1>Сцена</h1><p class="lead">Фотографии сценического пространства, зрительного зала и проходов на сцену. Нажми на фотографию для увеличения.</p></section>
 <figure class="photo hero"><button type="button" data-src="stage/stage-front.webp" data-caption="Общий вид сцены из зрительного зала" aria-label="Увеличить: общий вид сцены"><img src="stage/stage-front.webp" alt="Общий вид сцены из зрительного зала" fetchpriority="high" decoding="async"></button><figcaption>Общий вид сцены из зрительного зала</figcaption></figure>
 
-<section class="plan-section" aria-label="План сцены"><h2 class="section-heading">Stage Plan — план сцены</h2><figure class="plan-preview"><a href="stage/stage-plan.svg" target="_blank" rel="noopener" title="Открыть план в полном размере"><img src="stage/stage-plan.svg" alt="План сцены TODES: семь экранов, четыре лестницы и размеры по схеме" loading="lazy" decoding="async"></a><figcaption>Вид сверху · размеры в метрах · схема не в масштабе. Нажми для увеличения.</figcaption></figure></section>
+<section class="plan-section" aria-label="План сцены"><h2 class="section-heading">Stage Plan — план сцены</h2><figure class="plan-preview"><a href="stage/stage-plan.svg" target="_blank" rel="noopener" title="Открыть план в полном размере"><img src="stage/stage-plan.svg" alt="План сцены TODES: семь экранов, четыре лестницы и размеры по схеме" loading="lazy" decoding="async"></a><figcaption>Вид сверху · размеры в метрах · Нажми для увеличения.</figcaption></figure></section>
 <h2 class="section-heading">Сценическое пространство</h2>
 <section class="gallery" aria-label="Фотографии сценического пространства">
 <figure class="photo"><button type="button" data-src="stage/stage-angle-left.webp" data-caption="Вид сцены слева" aria-label="Увеличить фото сцены слева"><img src="stage/stage-angle-left.webp" alt="Сцена со стороны левого сектора зрительного зала" loading="lazy" decoding="async"></button><figcaption>Сцена — вид слева</figcaption></figure>
-<figure class="photo"><button type="button" data-src="stage/stage-angle-right.webp" data-caption="Вид сцены справа" aria-label="Увеличить фото сцены справа"><img src="stage/stage-angle-right.webp" alt="Сцена со стороны правого сектора зрительного зала" loading="lazy" decoding="async"></button><figcaption>Сцена — вид справа</figcaption></figure>
+
 <figure class="photo"><button type="button" data-src="stage/stage-from-stage.webp" data-caption="Сценическое пространство" aria-label="Увеличить фото сценического пространства"><img src="stage/stage-from-stage.webp" alt="Сценическое пространство с уровня сцены" loading="lazy" decoding="async"></button><figcaption>Сценическое пространство</figcaption></figure>
 </section>
 <h2 class="section-heading">Проходы на сцену</h2>
@@ -69,9 +88,48 @@ footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879
 </main>
 <footer>© TODESPRODUCTION 2026</footer>
 </div>
+<dialog class="feedback-dialog" id="stage-feedback-dialog" aria-labelledby="stage-feedback-title">
+  <div class="feedback-inner">
+    <button type="button" class="feedback-close" id="stage-feedback-close" aria-label="Закрыть">×</button>
+    <p class="feedback-kicker">TODESPRODUCTION / STAGE</p>
+    <h2 id="stage-feedback-title">Обратная связь</h2>
+    <p class="feedback-lead">Есть вопросы по сцене театра TODES? Напиши техническому специалисту.</p>
+    <form id="stage-feedback-form">
+      <label class="field"><span>Имя</span><input name="name" type="text" autocomplete="name" maxlength="120" required></label>
+      <label class="field"><span>Электронная почта</span><input name="email" type="email" autocomplete="email" maxlength="254" required></label>
+      <label class="field"><span>Сообщение</span><textarea name="message" maxlength="2500" required></textarea></label>
+      <button type="submit" class="send-btn">Подготовить письмо</button>
+    </form>
+    <p class="feedback-note">Откроется почтовое приложение. Чтобы отправить сообщение, подтверди отправку в нём.</p>
+    <a class="feedback-email" href="mailto:kondratiuk@todes.ru">kondratiuk@todes.ru</a>
+  </div>
+</dialog>
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Просмотр фотографии" aria-modal="true"><button class="close" id="close" type="button" aria-label="Закрыть просмотр">✕ Закрыть</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div>
 <script>
 (()=>{const modal=document.getElementById('lightbox');const display=document.getElementById('lightbox-image');const caption=document.getElementById('lightbox-caption');const close=document.getElementById('close');let previous=null;function hide(){modal.classList.remove('open');display.removeAttribute('src');document.body.style.overflow='';previous?.focus()}document.querySelectorAll('[data-src]').forEach(btn=>btn.addEventListener('click',()=>{previous=btn;display.src=btn.dataset.src;display.alt=btn.dataset.caption;caption.textContent=btn.dataset.caption;modal.classList.add('open');document.body.style.overflow='hidden';close.focus()}));close.addEventListener('click',hide);modal.addEventListener('click',e=>{if(e.target===modal)hide()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))hide()})})();
+</script>
+
+<script>
+(()=>{
+  const modal=document.getElementById("stage-feedback-dialog");
+  const open=document.getElementById("stage-feedback-open");
+  const close=document.getElementById("stage-feedback-close");
+  const form=document.getElementById("stage-feedback-form");
+  open.addEventListener("click",()=>{if(!modal.open) modal.showModal();form.elements.name.focus()});
+  close.addEventListener("click",()=>modal.close());
+  modal.addEventListener("click",event=>{if(event.target===modal)modal.close()});
+  form.addEventListener("submit",event=>{
+    event.preventDefault();
+    if(!form.reportValidity())return;
+    const name=form.elements.name.value.trim();
+    const email=form.elements.email.value.trim();
+    const message=form.elements.message.value.trim();
+    const subject="TODESPRODUCTION — Вопрос по сцене театра TODES";
+    const body="Имя: "+name+"\nЭлектронная почта: "+email+"\n\n"+message;
+    const uri="mailto:kondratiuk@todes.ru?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(body);
+    window.location.href=uri;
+  });
+})();
 </script>
 </body>
 </html>

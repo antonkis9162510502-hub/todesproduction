@@ -17,7 +17,6 @@
 <rect x="18" y="18" width="1144" height="774" rx="16" fill="url(#grid)" stroke="#303c48" stroke-width="1.2"/>
 <text x="54" y="67" class="txt" font-size="30" font-weight="700" letter-spacing="2">TODES / STAGE PLAN</text>
 <text x="54" y="90" class="small">Театр TODES · вид сверху · экраны и проходы · размеры в метрах</text>
-<text x="1032" y="72" class="small" text-anchor="end">НЕ В МАСШТАБЕ</text>
 <text x="590" y="126" class="txt" font-size="18" font-weight="650" text-anchor="middle" letter-spacing="1.5">BACKSTAGE</text>
 
 <path d="M147 164H1034 M192 193H990 M192 193V602 H990 V193" stroke="#a0adb7" stroke-width="2" fill="none"/>
@@ -76,5 +75,4 @@
 <text x="590" y="713" class="txt" font-size="20" text-anchor="middle" letter-spacing="1.2">ЗРИТЕЛЬНЫЙ ЗАЛ</text>
 <line x1="490" y1="743" x2="550" y2="743" class="screen"/>
 <text x="564" y="748" class="small" font-size="13">— Экраны</text>
-<text x="1040" y="743" class="small" text-anchor="end">Геометрия по эскизу пользователя · TODESPRODUCTION</text>
 </svg>
