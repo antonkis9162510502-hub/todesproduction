@@ -148,14 +148,23 @@ const categories=['theatre','tours','events'];
 const catLabels={theatre:'Театр',tours:'Гастроли',events:'Мероприятия'};
 const wd=['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
 const monthsFound=[...new Set(items.map(x=>x.date.slice(0,7)))].sort();
-const todayStr=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Moscow'}).format(new Date());
+const moscowDay=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Moscow'});
+const moscowClock=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Moscow',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'});
+function moscowToday(){return moscowDay.format(new Date())}
+const todayStr=moscowToday();
 const requestedMonth=new URLSearchParams(location.search).get('month');
 let selectedMonth=monthsFound.includes(requestedMonth)||requestedMonth==='all' ? requestedMonth : (monthsFound.find(x=>x>=todayStr.slice(0,7))||monthsFound[0]||'all');
 function plural(num){const n=Math.abs(num);return (n%10===1&&n%100!==11)?'событие':((n%10>=2&&n%10<=4&&(n%100<12||n%100>14))?'события':'событий')}
 function labelForMonth(key){if(key==='all')return 'Все месяцы';const [y,m]=key.split('-');return months[Number(m)-1][0].toUpperCase()+months[Number(m)-1].slice(1)+' '+y}
 function make(tag,cl,text){const n=document.createElement(tag);if(cl)n.className=cl;if(text!==undefined)n.textContent=text;return n}
+let lastRenderedMoscowDate=todayStr;
 function render(){
- const subset=items.filter(x=>selectedMonth==='all'||x.date.startsWith(selectedMonth));
+ const currentDay=moscowToday();
+ lastRenderedMoscowDate=currentDay;
+ const upcoming=items.filter(x=>x.date>=currentDay);
+ const availableMonths=[...new Set(upcoming.map(x=>x.date.slice(0,7)))].sort();
+ if(selectedMonth!=='all'&&!availableMonths.includes(selectedMonth))selectedMonth=availableMonths[0]||'all';
+ const subset=upcoming.filter(x=>selectedMonth==='all'||x.date.startsWith(selectedMonth));
  const root=document.getElementById('timeline');root.replaceChildren();
  const section=make('section','month');
  const calendar=make('div','calendar');
@@ -163,7 +172,7 @@ function render(){
  const monthCell=make('div','cell-head cell-head-month');
  const select=make('select','month-picker');select.id='month-select';select.setAttribute('aria-label','Месяц');
  const allOption=make('option','','Все месяцы');allOption.value='all';select.append(allOption);
- for(const key of monthsFound){const amount=items.filter(x=>x.date.startsWith(key)).length;const option=make('option','',labelForMonth(key));option.value=key;select.append(option)}
+ for(const key of availableMonths){const amount=upcoming.filter(x=>x.date.startsWith(key)).length;const option=make('option','',labelForMonth(key));option.value=key;select.append(option)}
  select.value=selectedMonth;
  select.addEventListener('change',()=>{selectedMonth=select.value;render()});
  const monthCount=make('div','month-count-lite',subset.length+' '+plural(subset.length));
@@ -196,7 +205,20 @@ function render(){
  }
  section.append(calendar);root.append(section);
 }
+function refreshAtMoscowMidnight(){
+ const now=new Date();
+ const clock=Object.fromEntries(moscowClock.formatToParts(now).filter(p=>p.type!=='literal').map(p=>[p.type,Number(p.value)]));
+ const elapsed=((clock.hour*60+clock.minute)*60+clock.second)*1000+now.getMilliseconds();
+ setTimeout(()=>{
+  if(moscowToday()!==lastRenderedMoscowDate)render();
+  refreshAtMoscowMidnight();
+ },86400000-elapsed+100);
+}
+function refreshIfDayChanged(){if(moscowToday()!==lastRenderedMoscowDate)render()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshIfDayChanged()});
+window.addEventListener('pageshow',refreshIfDayChanged);
 render();
+refreshAtMoscowMidnight();
 })();
 </script>
 </body></html>
