@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#090b0e">
+<meta name="description" content="Сцена театра TODES — фотографии сцены, зрительного зала и боковых проходов.">
+<title>Сцена — TODESPRODUCTION</title>
+<style>
+:root{color-scheme:dark;--bg:#090b0e;--text:#f1f1ee;--muted:#a4a9ae;--line:#2a2e33;--metal:#bcc5cd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:2px solid #dbe6ef;outline-offset:4px}
+.wrap{width:min(1130px,calc(100% - 44px));margin:0 auto}
+header{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid rgba(255,255,255,.09);padding:17px 0;flex-wrap:wrap}
+.brand{font-size:14px;font-weight:850;letter-spacing:.17em;color:#e5e8eb}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border:1px solid #59646e;border-radius:999px;color:#e7ebef;background:linear-gradient(145deg,rgba(158,172,185,.2),rgba(31,38,45,.58));font-size:11px;text-transform:uppercase;letter-spacing:.12em;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.pill:hover{background:#26313a}
+.intro{padding:46px 0 24px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.23em;color:#9da8b3;margin:0 0 10px}
+h1{font-size:clamp(36px,6vw,66px);letter-spacing:.03em;line-height:1.06;margin:0 0 13px;font-weight:780}
+.lead{color:#bac1c8;font-size:clamp(14px,2vw,16px);line-height:1.6;max-width:720px;margin:0}
+.photo{margin:0;min-width:0;overflow:hidden;border:1px solid #323943;border-radius:16px;background:#14171b;position:relative}
+.photo button{padding:0;border:0;background:transparent;color:inherit;display:block;width:100%;text-align:left}
+.photo img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease,filter .35s ease}
+.photo button:hover img{transform:scale(1.025);filter:brightness(1.07)}
+.photo figcaption{display:block;color:#bfc6cc;font-size:12px;padding:12px 15px;min-height:42px}
+.hero img{aspect-ratio:1.74;object-position:center center;height:auto}
+.hero figcaption{padding:16px 20px}
+.section-heading{font-size:19px;letter-spacing:.025em;margin:32px 0 15px;font-weight:640}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.gallery .photo img{aspect-ratio:1.48}
+.access{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:0 0 65px}
+.access .photo img{aspect-ratio:1.3;object-position:center 58%}
+footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 32px;color:#879098;font-size:11px;letter-spacing:.04em}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:99;display:none;align-items:center;justify-content:center;padding:60px 16px 34px}
+.lightbox.open{display:flex}.lightbox img{display:block;max-width:100%;max-height:calc(100dvh - 95px);object-fit:contain}.close{position:absolute;right:18px;top:15px;border:1px solid #6b7680;border-radius:100px;padding:9px 16px;background:#1c242c;color:#fff;font-size:14px}
+.lightbox p{position:absolute;bottom:9px;color:#d2d6dc;font-size:12px;margin:0;max-width:90%;text-align:center}
+@media(max-width:760px){header{min-height:auto}.brand{font-size:12px}.intro{padding:30px 0 21px}.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.access{gap:11px}.photo{border-radius:11px}.photo figcaption{font-size:11px;line-height:1.35;padding:10px 11px}.gallery .photo:first-child{grid-column:1/-1}.gallery .photo img{aspect-ratio:1.15}.gallery .photo:first-child img{aspect-ratio:1.65}.access .photo img{aspect-ratio:.8}.section-heading{margin:27px 0 12px}.pill{padding:11px 14px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.photo img{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a class="brand" href="index.html" aria-label="На главную">TODESPRODUCTION</a><nav><a class="pill" href="theatre.html">← Театр</a><a class="pill" href="index.html">На главную</a></nav></header>
+<main>
+<section class="intro"><p class="eyebrow">Театр TODES / Техническая информация</p><h1>Сцена</h1><p class="lead">Фотографии сценического пространства, зрительного зала и проходов на сцену. Нажми на фотографию для увеличения.</p></section>
+<figure class="photo hero"><button type="button" data-src="stage/stage-front.webp" data-caption="Общий вид сцены из зрительного зала" aria-label="Увеличить: общий вид сцены"><img src="stage/stage-front.webp" alt="Общий вид сцены из зрительного зала" fetchpriority="high" decoding="async"></button><figcaption>Общий вид сцены из зрительного зала</figcaption></figure>
+<h2 class="section-heading">Сценическое пространство</h2>
+<section class="gallery" aria-label="Фотографии сценического пространства">
+<figure class="photo"><button type="button" data-src="stage/stage-angle-left.webp" data-caption="Вид сцены слева" aria-label="Увеличить фото сцены слева"><img src="stage/stage-angle-left.webp" alt="Сцена со стороны левого сектора зрительного зала" loading="lazy" decoding="async"></button><figcaption>Сцена — вид слева</figcaption></figure>
+<figure class="photo"><button type="button" data-src="stage/stage-angle-right.webp" data-caption="Вид сцены справа" aria-label="Увеличить фото сцены справа"><img src="stage/stage-angle-right.webp" alt="Сцена со стороны правого сектора зрительного зала" loading="lazy" decoding="async"></button><figcaption>Сцена — вид справа</figcaption></figure>
+<figure class="photo"><button type="button" data-src="stage/stage-from-stage.webp" data-caption="Сценическое пространство" aria-label="Увеличить фото сценического пространства"><img src="stage/stage-from-stage.webp" alt="Сценическое пространство с уровня сцены" loading="lazy" decoding="async"></button><figcaption>Сценическое пространство</figcaption></figure>
+</section>
+<h2 class="section-heading">Проходы на сцену</h2>
+<section class="access" aria-label="Проходы и лестницы">
+<figure class="photo"><button type="button" data-src="stage/stage-access-1.webp" data-caption="Боковая лестница" aria-label="Увеличить фото боковой лестницы"><img src="stage/stage-access-1.webp" alt="Боковая лестница на сцену с зелёной маркировкой ступеней" loading="lazy" decoding="async"></button><figcaption>Боковая лестница</figcaption></figure>
+<figure class="photo"><button type="button" data-src="stage/stage-access-2.webp" data-caption="Дополнительный проход на сцену" aria-label="Увеличить фото дополнительного прохода"><img src="stage/stage-access-2.webp" alt="Дополнительный проход на сцену и лестница" loading="lazy" decoding="async"></button><figcaption>Дополнительный проход</figcaption></figure>
+</section>
+</main>
+<footer>© TODESPRODUCTION 2026</footer>
+</div>
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Просмотр фотографии" aria-modal="true"><button class="close" id="close" type="button" aria-label="Закрыть просмотр">✕ Закрыть</button><img id="lightbox-image" alt=""><p id="lightbox-caption"></p></div>
+<script>
+(()=>{const modal=document.getElementById('lightbox');const display=document.getElementById('lightbox-image');const caption=document.getElementById('lightbox-caption');const close=document.getElementById('close');let previous=null;function hide(){modal.classList.remove('open');display.removeAttribute('src');document.body.style.overflow='';previous?.focus()}document.querySelectorAll('[data-src]').forEach(btn=>btn.addEventListener('click',()=>{previous=btn;display.src=btn.dataset.src;display.alt=btn.dataset.caption;caption.textContent=btn.dataset.caption;modal.classList.add('open');document.body.style.overflow='hidden';close.focus()}));close.addEventListener('click',hide);modal.addEventListener('click',e=>{if(e.target===modal)hide()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))hide()})})();
+</script>
+</body>
+</html>
