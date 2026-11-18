@@ -58,7 +58,6 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
 .rule{padding:20px;border:1px solid #333c44;border-radius:11px;background:#11161b}
 .rule strong{display:block;margin-bottom:7px;color:#dbe3e9;font-size:14px}
 .rule p{margin:0;color:#9daab5;font-size:12px;line-height:1.7}
-.source-note{margin:20px 0 0;color:#808b96;font-size:11px}
 .footer{padding:23px 0 30px;border-top:1px solid #292d31;text-align:center;color:#808990;font-size:10px;font-weight:300;letter-spacing:.12em}
 .contact-dialog{position:fixed;width:min(510px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;margin:auto;padding:0;border:1px solid #444b54;border-radius:9px;background:#14181d;color:#f1f1ee;box-shadow:0 30px 100px rgba(0,0,0,.6)}
 .contact-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
@@ -107,11 +106,11 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
 <section class="intro">
  <p class="kicker">TODESPRODUCTION / <span data-i18n="theatre">ТЕАТР</span></p>
  <h1 data-i18n="title">Медиа</h1>
- <p class="lead" data-i18n="lead">Технические требования к рекламным медианосителям театра TODES. Выбери нужный экран и подготовь файл в указанном разрешении и формате.</p>
+ <p class="lead" data-i18n="lead">Технические требования к рекламным медианосителям театра TODES. </p>
  <div class="summary"><span data-i18n="summary1">5 типов носителей</span><span data-i18n="summary2">11 экранов</span><span data-i18n="summary3">25 кадров/с</span></div>
 </section>
 <section aria-label="Медианосители">
- <div class="section-heading"><h2 data-i18n="devices">Рекламные медианосители</h2><p data-i18n="deviceNote">Схемы показывают ориентацию экранов</p></div>
+ <div class="section-heading"><h2 data-i18n="devices">Рекламные медианосители</h2></div>
  <div class="media-grid">
   <article class="media-card">
    <div class="media-visual"><div class="media-screen vertical"><strong>ROLL<br>UP</strong><small>640 × 1920</small></div><span class="count" data-i18n="count4">4 шт.</span></div>
@@ -129,7 +128,7 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
   <article class="media-card">
    <div class="media-visual"><div class="media-screen wide"><strong data-i18n="cashLabel">КАССА</strong><small>1920 × 1080</small></div><span class="count" data-i18n="count2">2 шт.</span></div>
    <div class="media-info">
-    <h3 data-i18n="cash">Плазменная панель «Касса»</h3>
+    <h3 data-i18n="cash">Панель «Касса»</h3>
     <dl class="media-specs">
      <dt data-i18n="orientation">Ориентация</dt><dd data-i18n="horizontal">Горизонтальная</dd>
      <dt data-i18n="resolution">Разрешение</dt><dd>1920 × 1080 px</dd>
@@ -142,7 +141,7 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
   <article class="media-card">
    <div class="media-visual"><div class="media-screen wide"><strong data-i18n="barLabel">БАР</strong><small>1920 × 1080</small></div><span class="count" data-i18n="count3">3 шт.</span></div>
    <div class="media-info">
-    <h3 data-i18n="bar">Плазменная панель «Бар»</h3>
+    <h3 data-i18n="bar">Панель «Бар»</h3>
     <dl class="media-specs">
      <dt data-i18n="orientation">Ориентация</dt><dd data-i18n="horizontal">Горизонтальная</dd>
      <dt data-i18n="resolution">Разрешение</dt><dd>1920 × 1080 px</dd>
@@ -184,10 +183,9 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
  <h2 data-i18n="general">Общие требования к файлам</h2>
  <div class="rules-grid">
   <div class="rule"><strong data-i18n="still">Статичные изображения</strong><p data-i18n="stillDesc">JPG или PNG, цветовое пространство RGB — для всех медианосителей.</p></div>
-  <div class="rule"><strong data-i18n="video">Видеоматериалы</strong><p data-i18n="videoDesc">25 fps на всех носителях. Не меняй разрешение выбранного экрана.</p></div>
+  <div class="rule"><strong data-i18n="video">Видеоматериалы</strong><p data-i18n="videoDesc">25 fps на всех носителях.</p></div>
   <div class="rule"><strong data-i18n="mov">Файлы MOV / DXV-3</strong><p data-i18n="movDesc">Без полей (прогрессивная развёртка), квадратный пиксель, без альфа-канала (No Alpha).</p></div>
  </div>
- <p class="source-note" data-i18n="sourceNote">Параметры перенесены из файла «Тех. требования_МЕДИАНОСИТЕЛИ_ТЕАТР_ТОДЕС.xlsx».</p>
 </section>
 </main>
 <footer class="footer">© TODESPRODUCTION 2026</footer>
@@ -215,31 +213,31 @@ h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing
 const translations={
  ru:{
   backTheatre:"← Театр",backHome:"На главную",feedbackButton:"Обратная связь",theatre:"ТЕАТР",title:"Медиа",
-  lead:"Технические требования к рекламным медианосителям театра TODES. Выбери нужный экран и подготовь файл в указанном разрешении и формате.",
+  lead:"Технические требования к рекламным медианосителям театра TODES. ",
   summary1:"5 типов носителей",summary2:"11 экранов",summary3:"25 кадров/с",
-  devices:"Рекламные медианосители",deviceNote:"Схемы показывают ориентацию экранов",
+  devices:"Рекламные медианосители",
   count4:"4 шт.",count3:"3 шт.",count2:"2 шт.",count1:"1 шт.",
-  cashLabel:"КАССА",barLabel:"БАР",afishaLabel:"АФИША",cash:"Плазменная панель «Касса»",bar:"Плазменная панель «Бар»",presswall:"Видеоэкран PressWall",afisha:"Видеоэкран «Афиша»",
+  cashLabel:"КАССА",barLabel:"БАР",afishaLabel:"АФИША",cash:"Панель «Касса»",bar:"Панель «Бар»",presswall:"Видеоэкран PressWall",afisha:"Видеоэкран «Афиша»",
   orientation:"Ориентация",vertical:"Вертикальная",horizontal:"Горизонтальная",resolution:"Разрешение",videoFormat:"Видеоформат",bitrate:"Битрейт",fps:"Частота кадров",alpha:"Альфа-канал",
   general:"Общие требования к файлам",still:"Статичные изображения",stillDesc:"JPG или PNG, цветовое пространство RGB — для всех медианосителей.",
-  video:"Видеоматериалы",videoDesc:"25 fps на всех носителях. Не меняй разрешение выбранного экрана.",
+  video:"Видеоматериалы",videoDesc:"25 fps на всех носителях.",
   mov:"Файлы MOV / DXV-3",movDesc:"Без полей (прогрессивная развёртка), квадратный пиксель, без альфа-канала (No Alpha).",
-  sourceNote:"Параметры перенесены из файла «Тех. требования_МЕДИАНОСИТЕЛИ_ТЕАТР_ТОДЕС.xlsx».",
+  
   feedbackTitle:"Обратная связь",feedbackLead:"Есть вопрос по медианосителям? Напиши нам — ответим по электронной почте.",
   yourName:"Имя",yourEmail:"Электронная почта",yourMessage:"Сообщение",sendMessage:"Отправить сообщение",feedbackNote:"Нажимая «Отправить», ты передаёшь данные для ответа на обращение."
  },
  en:{
   backTheatre:"← Theatre",backHome:"Home",feedbackButton:"Contact",theatre:"THEATRE",title:"Media",
-  lead:"Technical specifications for advertising media displays at the TODES Theatre. Select a screen and prepare your file in the specified size and format.",
+  lead:"Technical specifications for advertising media displays at the TODES Theatre. ",
   summary1:"5 display types",summary2:"11 displays",summary3:"25 frames/sec",
-  devices:"Advertising media displays",deviceNote:"Illustrations show screen orientation",
+  devices:"Advertising media displays",
   count4:"4 units",count3:"3 units",count2:"2 units",count1:"1 unit",
   cashLabel:"BOX OFFICE",barLabel:"BAR",afishaLabel:"POSTER",cash:"Box office screens",bar:"Bar screens",presswall:"PressWall screen",afisha:"Poster display",
   orientation:"Orientation",vertical:"Portrait",horizontal:"Landscape",resolution:"Resolution",videoFormat:"Video format",bitrate:"Bitrate",fps:"Frame rate",alpha:"Alpha channel",
   general:"General file requirements",still:"Still images",stillDesc:"JPG or PNG in RGB color space, accepted for every display type.",
-  video:"Video content",videoDesc:"25 fps for all display types. Use the resolution specified for your screen.",
+  video:"Video content",videoDesc:"25 fps for all display types. ",
   mov:"MOV / DXV-3 files",movDesc:"Progressive scan, square pixels, without an alpha channel (No Alpha).",
-  sourceNote:"Technical parameters transcribed from the supplied TODES media display requirements spreadsheet.",
+  
   feedbackTitle:"Media inquiries",feedbackLead:"Have a question about the displays? Send us a message and we will reply by email.",
   yourName:"Name",yourEmail:"Email address",yourMessage:"Message",sendMessage:"Send message",feedbackNote:"By submitting, you share your contact details so we can reply."
  }
