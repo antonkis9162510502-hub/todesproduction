@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>План мероприятий — TODESPRODUCTION</title><style>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Театр — TODESPRODUCTION</title><style>
 
 :root{color-scheme:dark;--bg:#090b0e;--text:#f1f1ee;--muted:#a4a9ae;--line:#2a2e33;--metal:#bcc5cd}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -11,9 +11,15 @@ header{min-height:91px;height:auto;padding:14px 0;border-bottom:1px solid rgba(2
 .intro{padding:80px 0 52px}.kicker{margin:0 0 19px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}.intro h1{font-size:clamp(39px,6vw,70px);line-height:1.07;font-weight:600;letter-spacing:-.055em;margin:0 0 22px}.lead{font-size:14px;line-height:1.75;color:#9fa9b1;max-width:660px;margin:0}
 
 section.month{margin:0 0 42px}section.month h2{font-size:clamp(28px,5vw,38px);font-weight:750;line-height:1.15;letter-spacing:-.025em;text-transform:capitalize;margin:0 0 20px}ul{padding:0;list-style:none}li{display:grid;grid-template-columns:6em minmax(55px,92px) 1fr;align-items:center;gap:16px;padding:12px 0;border-top:1px solid var(--line)}time{color:#d7dde3;font-size:18px;font-weight:750;line-height:1.2;letter-spacing:.01em}time.weekend{color:#f16a70}small{color:var(--muted);font-size:14px}li img{width:100%;height:auto;display:block;aspect-ratio:14/9;object-fit:cover;border-radius:5px;background:#21262c}li strong{font-size:clamp(16px,2vw,23px)}li small{display:block;margin-top:4px}.header-links .back{white-space:nowrap}.header-links button.back[disabled]{opacity:.42;cursor:not-allowed;color:#9da7b0;border-color:#3e464e;background:#14191e;box-shadow:none}.header-links button.back[disabled]:hover{color:#9da7b0;border-color:#3e464e;background:#14191e;transform:none}@media(max-width:540px){header{height:auto;min-height:91px;flex-wrap:wrap;padding:12px 0;gap:8px}.header-links{flex-wrap:wrap}.lang{margin-left:auto}.header-links{gap:6px}.header-links .back{padding:10px 12px;font-size:10px}.wrap{width:calc(100% - 32px)}li{grid-template-columns:4em 60px 1fr;gap:10px}.intro{padding:40px 0 12px}}
+
+/* Theatre hero banner: softened edges are preserved in its transparent WEBP */
+.intro{padding:28px 0 22px}
+.intro h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.theatre-banner{display:block;width:min(1210px,calc(100vw - 24px));max-width:none;height:auto;margin-left:50%;transform:translateX(-50%)}
+@media(max-width:540px){.intro{padding:18px 0 8px}.theatre-banner{width:calc(100vw - 12px)}}
 </style></head><body><div class="wrap"><header><div class="header-links"><a class="back" id="home" href="index.html">← На главную</a><a class="back" id="lightplot" href="lightplot-theatre-2027.html" target="_blank" rel="noopener">Свет</a><a class="back" id="video" href="video.html" target="_blank" rel="noopener">Видео</a><a class="back" id="sound" href="sound.html">Звук</a><a class="back" id="stage" href="stage.html" target="_blank" rel="noopener">Сцена</a><a class="back" id="media" href="media.html" target="_blank" rel="noopener">Медиа</a>
 <a class="back" id="special-effects" href="special-effects.html" target="_blank" rel="noopener">Спецэффекты</a>
-</div><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>План мероприятий</h1></section><div id="schedule"></div></main></div><script>
+</div><div class="lang"><button data-lang="ru">RU</button><button data-lang="en">EN</button></div></header><main><section class="intro"><h1>Театр</h1><img class="theatre-banner" src="todes-theatre-banner.webp" alt="Театр Аллы Духовой TODES — объёмные стеклянные буквы в золотистых театральных лучах" width="1400" height="700" fetchpriority="high"></section><div id="schedule"></div></main></div><script>
 const shows = [
   [
     "#Продолжение",
@@ -524,7 +530,7 @@ function refreshSchedule() {
 function render(lang) {
   const en = lang === 'en';
   document.documentElement.lang = lang;
-  const title = en ? 'Event schedule' : 'План мероприятий';
+  const title = en ? 'Theatre' : 'Театр';
   document.querySelector('h1').textContent = title;
   document.title = title + ' — TODESPRODUCTION';
   document.querySelector('#lightplot').textContent = en ? 'Lighting' : 'Свет';
