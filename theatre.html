@@ -105,6 +105,27 @@ for (const [index, label] of Object.entries(studioNames)) {
   shows[index][1] = label[1];
   shows[index][2] = studioPoster;
 }
+// Студийные мероприятия из афиши января 2027; единая миниатюра без дубля текста.
+shows.push(
+  ...[
+  [
+    "Речной",
+    "Rechnoy"
+  ],
+  [
+    "Солнцево",
+    "Solntsevo"
+  ],
+  [
+    "Реутов",
+    "Reutov"
+  ],
+  [
+    "Одинцово",
+    "Odintsovo"
+  ]
+].map(([ru,en]) => [ru,en,studioPoster])
+);
 const performances = [
   {
     "date": "2026-11-15",
@@ -484,6 +505,14 @@ const performances = [
     "count": 1,
     "time": "18:00"
   }
+,
+  {"date":"2027-01-24","i":16,"count":1,"time":"13:00"},
+  {"date":"2027-01-24","i":17,"count":1,"time":"19:00"},
+  {"date":"2027-01-29","i":0,"count":1,"time":"20:00"},
+  {"date":"2027-01-30","i":3,"count":1,"time":"15:00"},
+  {"date":"2027-01-30","i":0,"count":1,"time":"19:00"},
+  {"date":"2027-01-31","i":18,"count":1,"time":"13:00"},
+  {"date":"2027-01-31","i":19,"count":1,"time":"19:00"}
 ];
 const moscowDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Moscow' });
 let midnightTimer;
