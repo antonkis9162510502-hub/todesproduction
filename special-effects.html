@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090b0e">
+<meta name="description" content="Спецэффекты театра TODES: залп серпантина, сброс шариков, Cryo Jet и Cold Spark.">
+<title>Спецэффекты — театр TODES | TODESPRODUCTION</title>
+<style>
+:root{color-scheme:dark;--bg:#090b0e;--panel:#11161b;--text:#f1f1ee;--muted:#a4a9ae;--line:#303842}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--text);background:var(--bg);font:14px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 0%,rgba(114,135,158,.11),transparent 48%)}
+a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}button{cursor:pointer}
+:focus-visible{outline:2px solid #c6d0da;outline-offset:3px}
+.wrap{width:min(1080px,calc(100% - 44px));margin:0 auto}
+.header{min-height:91px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.header-links{display:flex;align-items:center;flex-wrap:wrap;gap:10px}
+.back{display:inline-flex;align-items:center;justify-content:center;min-height:41px;padding:11px 19px;border:1px solid #59646e;border-radius:999px;background:linear-gradient(145deg,rgba(158,172,185,.2),rgba(31,38,45,.58));color:#e7ebef;text-transform:uppercase;letter-spacing:.08em;font-size:11px;line-height:1.3;white-space:nowrap;transition:filter .2s,border-color .2s}
+.back:hover{border-color:#b7c3cd;filter:brightness(1.2)}
+.lang{display:flex;gap:3px;flex:none;padding:3px;border:1px solid #343b42;border-radius:99px;background:rgba(10,13,17,.7)}
+.lang button{height:28px;min-width:38px;border:0;border-radius:99px;background:transparent;color:#939da7;font-size:11px;font-weight:750}
+.lang button[aria-pressed="true"]{color:#101419;background:linear-gradient(145deg,#e4e8ed,#aab4bd)}
+.intro{padding:74px 0 48px}
+.kicker{margin:0 0 16px;color:#aeb9c4;letter-spacing:.27em;font-size:10px;text-transform:uppercase}
+h1{font-size:clamp(42px,6vw,70px);font-weight:600;line-height:1.1;letter-spacing:-.055em;margin:0 0 20px}
+.lead{font-size:15px;line-height:1.8;color:#aab2b9;max-width:725px;margin:0}
+.effects-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;padding:0 0 88px}
+.effect{overflow:hidden;background:linear-gradient(145deg,#141a20,#0d1115);border:1px solid #303842;border-radius:13px;min-width:0}
+.effect-photo{position:relative;overflow:hidden;aspect-ratio:16/9;background:linear-gradient(130deg,#242d38,#111b23 55%,#303c48)}
+.effect-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease,filter .4s ease}
+.effect:hover .effect-photo img{transform:scale(1.035)}
+.effect.soon .effect-photo img{filter:saturate(.73) brightness(.72)}
+.effect-photo:after{content:"";position:absolute;inset:50% 0 0;pointer-events:none;background:linear-gradient(to top,rgba(5,8,11,.33),transparent)}
+.effect-content{padding:26px 26px 29px}
+.effect-head{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-bottom:11px}
+.effect h2{font-size:clamp(21px,2.6vw,27px);font-weight:650;letter-spacing:-.025em;line-height:1.2;margin:0}
+.soon-tag{display:inline-flex;align-items:center;border:1px solid #67737c;border-radius:999px;padding:4px 11px;color:#b2c0ca;font-size:10px;font-weight:650;letter-spacing:.12em;text-transform:uppercase}
+.effect p{margin:0;color:#aab4bd;font-size:13px;line-height:1.7}
+.footer{padding:23px 0 30px;border-top:1px solid #292d31;text-align:center;color:#808990;font-size:10px;font-weight:300;letter-spacing:.12em}
+.contact-dialog{position:fixed;width:min(510px,calc(100% - 28px));max-height:calc(100dvh - 28px);overflow-y:auto;margin:auto;padding:0;border:1px solid #444b54;border-radius:9px;background:#14181d;color:#f1f1ee;box-shadow:0 30px 100px rgba(0,0,0,.6)}
+.contact-dialog::backdrop{background:rgba(0,0,0,.78);backdrop-filter:blur(5px)}
+.contact-dialog-inner{position:relative;padding:clamp(23px,5vw,40px)}
+.contact-dialog-kicker{margin:0 45px 12px 0;color:#aab6c0;letter-spacing:.17em;font-size:11px;font-weight:700}
+.contact-dialog h2{margin:0 35px 9px 0;font-size:clamp(28px,6vw,38px);line-height:1.12}
+.contact-dialog-lead{margin:0 0 20px;font-size:13px;line-height:1.65;color:#aab0b6}
+.contact-close{position:absolute;right:19px;top:18px;display:grid;place-items:center;width:36px;height:36px;background:transparent;color:#d3d7dc;border:1px solid #424a52;border-radius:50%;font-size:26px;line-height:1;cursor:pointer}
+.contact-close:hover{background:#28313a}
+.contact-dialog .field{display:block;margin:14px 0}
+.contact-dialog .field span{display:block;font-size:12px;margin:0 0 9px;color:#c7c9ca}
+.contact-dialog .field input,.contact-dialog .field textarea{width:100%;background:#0b0e11;color:#f4f4f4;border:1px solid #454c53;border-radius:3px;outline:0;padding:14px;font-size:14px;transition:border-color .15s}
+.contact-dialog .field input:focus,.contact-dialog .field textarea:focus{border-color:#b5a185}
+.contact-dialog .field textarea{resize:vertical;min-height:115px;line-height:1.5}
+.contact-dialog .send-btn{width:100%;min-height:49px;margin-top:8px;border:0;border-radius:3px;background:#e9e7e2;color:#0b0d0e;font-size:13px;font-weight:650;cursor:pointer}
+.contact-dialog .send-btn:disabled{opacity:.6;cursor:wait}
+.contact-dialog .contact-status{color:#cbd6e0;line-height:1.55;font-size:13px;margin:12px 0 0}
+.contact-dialog .contact-status:empty{display:none}
+.contact-dialog .contact-note{margin:15px 0 0;font-size:11px;color:#939aa2;line-height:1.6}
+.contact-dialog .bot-field{position:absolute!important;width:1px;height:1px;opacity:0;left:-9999px;overflow:hidden;pointer-events:none}
+@media(max-width:680px){.wrap{width:calc(100% - 32px)}.header{flex-wrap:wrap;padding:12px 0}.header-links{gap:6px}.back{padding:10px 12px;min-height:37px;font-size:10px}.lang{margin-left:auto}.intro{padding:45px 0 35px}.effects-grid{grid-template-columns:1fr;gap:17px;padding-bottom:60px}.effect-content{padding:21px}.contact-dialog-inner{padding:23px}}
+@media(prefers-reduced-motion:reduce){.effect-photo img,.back{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="header">
+ <nav class="header-links" aria-label="Navigation">
+  <a class="back" id="back-theatre" href="theatre.html" data-i18n="backTheatre">← Театр</a>
+  <a class="back" id="back-home" href="index.html" data-i18n="backHome">На главную</a>
+  <button type="button" class="back contact-open" data-i18n="contact">Контакты</button>
+ </nav>
+ <div class="lang" role="group" aria-label="Language / Язык">
+  <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+ </div>
+</header>
+<main>
+<section class="intro">
+ <p class="kicker">TODESPRODUCTION / <span data-i18n="theatre">ТЕАТР</span></p>
+ <h1 data-i18n="title">Спецэффекты</h1>
+ <p class="lead" data-i18n="lead">Яркие моменты спектаклей и событий. Подбираем визуальные эффекты под сцену, музыку и режиссёрский замысел.</p>
+</section>
+<section class="effects-grid" aria-label="Спецэффекты">
+ <!-- Временные иллюстрации: свободные стоковые изображения Pexels, будут заменены фотографиями TODESPRODUCTION.
+  Serpentine: https://www.pexels.com/photo/people-watching-live-concert-5193533/
+  Balloons: https://www.pexels.com/photo/balloons-over-crowd-in-stadium-19683874/
+  Smoke: https://www.pexels.com/photo/people-amid-fog-at-a-concert-23964428/
+  Sparks: https://www.pexels.com/photo/stage-performance-on-a-festival-11179339/
+ -->
+ <article class="effect">
+  <div class="effect-photo"><img src="https://images.pexels.com/photos/5193533/pexels-photo-5193533.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" alt="Серпантин над зрителями на концерте — временная иллюстрация" loading="lazy" decoding="async"></div>
+  <div class="effect-content"><div class="effect-head"><h2 data-i18n="serpentine">Залп серпантина</h2></div><p data-i18n="serpentineDesc">Эффектный выброс бумажных лент для кульминации номера или финала представления.</p></div>
+ </article>
+ <article class="effect">
+  <div class="effect-photo"><img src="https://images.pexels.com/photos/19683874/pexels-photo-19683874.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" alt="Разноцветные воздушные шары над зрителями — временная иллюстрация" loading="lazy" decoding="async"></div>
+  <div class="effect-content"><div class="effect-head"><h2 data-i18n="balloons">Сброс шариков</h2></div><p data-i18n="balloonsDesc">Праздничный дождь из воздушных шаров над сценой или зрительным залом.</p></div>
+ </article>
+ <article class="effect soon">
+  <div class="effect-photo"><img src="https://images.pexels.com/photos/23964428/pexels-photo-23964428.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" alt="Дымовая атмосфера на концерте — временная иллюстрация, не оборудование TODES" loading="lazy" decoding="async"></div>
+  <div class="effect-content"><div class="effect-head"><h2 data-i18n="cryo">Залпы с эффектом Cryo Jet</h2><span class="soon-tag" data-i18n="soon">Скоро</span></div><p data-i18n="cryoDesc">Мощные белые струи для эффектных акцентов на сцене.</p></div>
+ </article>
+ <article class="effect soon">
+  <div class="effect-photo"><img src="https://images.pexels.com/photos/11179339/pexels-photo-11179339.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" alt="Сценическое искровое шоу — временная иллюстрация, не оборудование TODES" loading="lazy" decoding="async"></div>
+  <div class="effect-content"><div class="effect-head"><h2 data-i18n="sparks">Cold Spark фонтаны</h2><span class="soon-tag" data-i18n="soon">Скоро</span></div><p data-i18n="sparksDesc">Искровые фонтаны для ярких акцентов и финальных сцен.</p></div>
+ </article>
+</section>
+</main>
+<footer class="footer">© TODESPRODUCTION 2026</footer>
+</div>
+<dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+ <div class="contact-dialog-inner">
+  <button type="button" class="contact-close" id="contact-close" aria-label="Закрыть" title="Закрыть">×</button>
+  <p class="contact-dialog-kicker">TODESPRODUCTION</p>
+  <h2 id="contact-dialog-title" data-i18n="write">Написать нам</h2>
+  <p class="contact-dialog-lead" data-i18n="contactLead">Расскажи о проекте — мы свяжемся с тобой по электронной почте.</p>
+  <form name="contact" id="contact-form" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+   <input type="hidden" name="form-name" value="contact">
+   <p class="bot-field" aria-hidden="true"><label>Leave empty: <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+   <label class="field"><span data-i18n="yourName">Имя</span><input type="text" name="name" autocomplete="name" maxlength="120" required></label>
+   <label class="field"><span data-i18n="yourEmail">Электронная почта</span><input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+   <label class="field"><span data-i18n="yourMessage">Сообщение</span><textarea name="message" maxlength="5000" required></textarea></label>
+   <button type="submit" class="send-btn" data-i18n="sendMessage">Отправить сообщение</button>
+   <p class="contact-status" id="contact-status" role="status" aria-live="polite"></p>
+  </form>
+  <p class="contact-note" data-i18n="contactNote">Нажимая «Отправить», ты передаёшь нам данные для ответа на обращение.</p>
+ </div>
+</dialog>
+<script>
+const translations={
+ ru:{
+  backTheatre:"← Театр",backHome:"На главную",contact:"Контакты",theatre:"ТЕАТР",title:"Спецэффекты",
+  lead:"Яркие моменты спектаклей и событий. Подбираем визуальные эффекты под сцену, музыку и режиссёрский замысел.",
+  serpentine:"Залп серпантина",serpentineDesc:"Эффектный выброс бумажных лент для кульминации номера или финала представления.",
+  balloons:"Сброс шариков",balloonsDesc:"Праздничный дождь из воздушных шаров над сценой или зрительным залом.",
+  cryo:"Залпы с эффектом Cryo Jet",cryoDesc:"Мощные белые струи для эффектных акцентов на сцене.",
+  sparks:"Cold Spark фонтаны",sparksDesc:"Искровые фонтаны для ярких акцентов и финальных сцен.",soon:"Скоро",
+  write:"Написать нам",contactLead:"Расскажи о проекте — мы свяжемся с тобой по электронной почте.",
+  yourName:"Имя",yourEmail:"Электронная почта",yourMessage:"Сообщение",sendMessage:"Отправить сообщение",
+  contactNote:"Нажимая «Отправить», ты передаёшь нам данные для ответа на обращение."
+ },
+ en:{
+  backTheatre:"← Theatre",backHome:"Home",contact:"Contact",theatre:"THEATRE",title:"Special Effects",
+  lead:"Memorable moments for performances and events. We select visual effects to suit the stage, music and artistic direction.",
+  serpentine:"Streamer Burst",serpentineDesc:"A striking burst of paper streamers for a finale or an unforgettable onstage moment.",
+  balloons:"Balloon Drop",balloonsDesc:"A colorful shower of balloons above the stage or audience.",
+  cryo:"Cryo Jet Bursts",cryoDesc:"Powerful white plumes for dramatic onstage accents.",
+  sparks:"Cold Spark Fountains",sparksDesc:"Spark fountains for powerful accents and grand finales.",soon:"Coming soon",
+  write:"Contact us",contactLead:"Tell us about your project — we will reply by email.",
+  yourName:"Name",yourEmail:"Email address",yourMessage:"Message",sendMessage:"Send message",
+  contactNote:"By sending this message, you share your details so we can reply."
+ }
+};
+function applyLanguage(lang){
+ if(lang!=="en")lang="ru";
+ document.documentElement.lang=lang;
+ const dict=translations[lang];
+ document.querySelectorAll("[data-i18n]").forEach(el=>{const key=el.dataset.i18n;if(Object.prototype.hasOwnProperty.call(dict,key))el.textContent=dict[key]});
+ document.querySelector("#back-theatre").href="theatre.html?lang="+lang;
+ document.querySelector("#back-home").href="index.html?lang="+lang;
+ document.querySelectorAll(".lang button").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.lang===lang)));
+ document.title=(lang==="en"?"Special Effects — TODES Theatre":"Спецэффекты — театр TODES")+" | TODESPRODUCTION";
+}
+document.querySelectorAll(".lang button").forEach(el=>el.addEventListener("click",()=>{
+ const lang=el.dataset.lang;
+ history.replaceState(null,"","?lang="+lang);
+ applyLanguage(lang);
+}));
+applyLanguage(new URLSearchParams(location.search).get("lang")==="en"?"en":"ru");
+(()=>{
+ const modal=document.getElementById("contact-dialog");
+ const form=document.getElementById("contact-form");
+ const status=document.getElementById("contact-status");
+ const submit=form.querySelector('[type="submit"]');
+ const messages={
+  ru:{sending:"Отправляем…",sent:"Спасибо! Сообщение отправлено.",error:"Не удалось отправить сообщение. Попробуй ещё раз чуть позже."},
+  en:{sending:"Sending…",sent:"Thank you! Your message has been sent.",error:"We could not send your message. Please try again later."}
+ };
+ const getMessages=()=>messages[document.documentElement.lang]||messages.ru;
+ document.querySelectorAll(".contact-open").forEach(button=>button.addEventListener("click",()=>{
+  status.textContent="";
+  if(!modal.open)modal.showModal();
+  form.querySelector('[name="name"]').focus();
+ }));
+ document.getElementById("contact-close").addEventListener("click",()=>modal.close());
+ modal.addEventListener("click",e=>{if(e.target===modal)modal.close()});
+ form.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!form.reportValidity()||submit.disabled)return;
+  status.textContent=getMessages().sending;
+  submit.disabled=true;
+  try{
+   const response=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(new FormData(form)).toString()});
+   if(!response.ok)throw Error("HTTP "+response.status);
+   status.textContent=getMessages().sent;
+   form.reset();
+  }catch(error){status.textContent=getMessages().error}
+  finally{submit.disabled=false}
+ });
+})();
+</script>
+</body>
+</html>
