@@ -56,7 +56,7 @@ h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin
 <body>
 <div class="wrap">
 <header class="top">
-<nav class="topnav" aria-label="Навигация"><a class="pill" id="back" href="theatre.html">← Театр</a><a class="pill" id="home" href="index.html">На главную</a><span class="pill current" id="sound-nav">Звук</span><button class="pill" type="button" id="feedback-open">Обратная связь</button></nav>
+<nav class="topnav" aria-label="Навигация"><a class="pill" id="back" href="theatre.html">← Театр</a><a class="pill" id="home" href="index.html">На главную</a><button class="pill" type="button" id="feedback-open">Обратная связь</button></nav>
 <div class="lang" role="group" aria-label="Язык"><button type="button" data-lang="ru" aria-pressed="true">RU</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
 </header>
 <main>
@@ -122,7 +122,7 @@ h1{font-size:clamp(38px,6vw,68px);line-height:1.05;letter-spacing:-.045em;margin
 (function(){
 const ru={back:"← Театр",home:"На главную",nav:"Звук",feedback:"Обратная связь",kicker:"Техническое оснащение театра",title:"Звук",lead:"Стационарное звуковое оборудование зрительного зала, сцены и фойе театра TODES.",note:"Перечень оборудования предоставлен технической службой театра TODES."};
 const en={back:"← Theatre",home:"Home",nav:"Sound",feedback:"Contact",kicker:"Theatre technical equipment",title:"Sound",lead:"In-house audio equipment for the TODES theatre auditorium, stage and foyer.",note:"Equipment list provided by the TODES theatre technical team."};
-function setLanguage(lang){let dict=lang==="en"?en:ru;document.documentElement.lang=lang;document.title=lang==="en"?"Sound — TODES Theatre":"Звук — Театр TODES";["back","home"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.getElementById("sound-nav").textContent=dict.nav;document.getElementById("feedback-open").textContent=dict.feedback;["kicker","title","lead","note"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.querySelectorAll("[data-ru][data-en]").forEach(el=>{el.textContent=el.getAttribute("data-"+lang)});document.querySelectorAll(".lang button").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang)));document.getElementById("back").href="theatre.html?lang="+lang;document.getElementById("home").href="index.html?lang="+lang;history.replaceState(null,"",location.pathname+"?lang="+lang)}
+function setLanguage(lang){let dict=lang==="en"?en:ru;document.documentElement.lang=lang;document.title=lang==="en"?"Sound — TODES Theatre":"Звук — Театр TODES";["back","home"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.getElementById("feedback-open").textContent=dict.feedback;["kicker","title","lead","note"].forEach(id=>{document.getElementById(id).textContent=dict[id]});document.querySelectorAll("[data-ru][data-en]").forEach(el=>{el.textContent=el.getAttribute("data-"+lang)});document.querySelectorAll(".lang button").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang)));document.getElementById("back").href="theatre.html?lang="+lang;document.getElementById("home").href="index.html?lang="+lang;history.replaceState(null,"",location.pathname+"?lang="+lang)}
 document.querySelectorAll(".lang button").forEach(btn=>btn.addEventListener("click",()=>setLanguage(btn.dataset.lang)));setLanguage(new URLSearchParams(location.search).get("lang")==="en"?"en":"ru");
 })();
 (function(){
